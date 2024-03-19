@@ -53,6 +53,13 @@ namespace SomerenUI
             telefoonnummer = new System.Windows.Forms.ColumnHeader();
             kamernummer = new System.Windows.Forms.ColumnHeader();
             label1 = new System.Windows.Forms.Label();
+            idStudent = new System.Windows.Forms.ColumnHeader();
+            studentNummer = new System.Windows.Forms.ColumnHeader();
+            voornaam = new System.Windows.Forms.ColumnHeader();
+            achternaam = new System.Windows.Forms.ColumnHeader();
+            klas = new System.Windows.Forms.ColumnHeader();
+            telefoonnummer = new System.Windows.Forms.ColumnHeader();
+            kamernummer = new System.Windows.Forms.ColumnHeader();
             pnlRooms = new System.Windows.Forms.Panel();
             pictureBox3 = new System.Windows.Forms.PictureBox();
             listViewRooms = new System.Windows.Forms.ListView();
@@ -74,15 +81,6 @@ namespace SomerenUI
             LastName = new System.Windows.Forms.ColumnHeader();
             TelephoneNumber = new System.Windows.Forms.ColumnHeader();
             Age = new System.Windows.Forms.ColumnHeader();
-            pnlActivities = new System.Windows.Forms.Panel();
-            pictureBox4 = new System.Windows.Forms.PictureBox();
-            listViewActivities = new System.Windows.Forms.ListView();
-            ActivityId = new System.Windows.Forms.ColumnHeader();
-            ActiviteitSoortActiviteit = new System.Windows.Forms.ColumnHeader();
-            ActiviteitBeginTijd = new System.Windows.Forms.ColumnHeader();
-            ActiviteitEindTijd = new System.Windows.Forms.ColumnHeader();
-            labelActivities = new System.Windows.Forms.Label();
-            ActiviteitDatum = new System.Windows.Forms.ColumnHeader();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -91,8 +89,6 @@ namespace SomerenUI
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             pnlLecturers.SuspendLayout();
-            pnlActivities.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -146,7 +142,6 @@ namespace SomerenUI
             activitiesToolStripMenuItem.Name = "activitiesToolStripMenuItem";
             activitiesToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             activitiesToolStripMenuItem.Text = "Activities";
-            activitiesToolStripMenuItem.Click += activitiesToolStripMenuItem_Click;
             // 
             // roomsToolStripMenuItem
             // 
@@ -196,8 +191,8 @@ namespace SomerenUI
             // 
             // listViewStudents
             // 
-            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { idStudent, studentNummer, voornaam, achternaam, klas, telefoonnummer, kamernummer });
             listViewStudents.Location = new System.Drawing.Point(18, 56);
+            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { idStudent, studentNummer, voornaam, achternaam, klas, telefoonnummer, kamernummer });
             listViewStudents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listViewStudents.Name = "listViewStudents";
             listViewStudents.Size = new System.Drawing.Size(1093, 526);
@@ -246,9 +241,43 @@ namespace SomerenUI
             label1.Location = new System.Drawing.Point(19, 12);
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(134, 41);
+            label1.Size = new System.Drawing.Size(157, 48);
             label1.TabIndex = 0;
             label1.Text = "Students";
+            // 
+            // id
+            // 
+            idStudent.Text = "id";
+            // 
+            // studentNummer
+            // 
+            studentNummer.Text = "Studentnummer";
+            studentNummer.Width = 160;
+            // 
+            // voornaam
+            // 
+            voornaam.Text = "Voornaam";
+            voornaam.Width = 120;
+            // 
+            // achternaam
+            // 
+            achternaam.Text = "Achternaam";
+            achternaam.Width = 120;
+            // 
+            // klas
+            // 
+            klas.Text = "Klas";
+            klas.Width = 80;
+            // 
+            // telefoonnummer
+            // 
+            telefoonnummer.Text = "Telefoonnummer";
+            telefoonnummer.Width = 160;
+            // 
+            // kamernummer
+            // 
+            kamernummer.Text = "Kamernummer";
+            kamernummer.Width = 160;
             // 
             // pnlRooms
             // 
@@ -401,81 +430,11 @@ namespace SomerenUI
             // 
             Age.Text = "Age";
             // 
-            // pnlActivities
-            // 
-            pnlActivities.Controls.Add(pictureBox4);
-            pnlActivities.Controls.Add(listViewActivities);
-            pnlActivities.Controls.Add(labelActivities);
-            pnlActivities.Location = new System.Drawing.Point(12, 36);
-            pnlActivities.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            pnlActivities.Name = "pnlActivities";
-            pnlActivities.Size = new System.Drawing.Size(1072, 617);
-            pnlActivities.TabIndex = 5;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = (System.Drawing.Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new System.Drawing.Point(920, 9);
-            pictureBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new System.Drawing.Size(149, 164);
-            pictureBox4.TabIndex = 4;
-            pictureBox4.TabStop = false;
-            // 
-            // listViewActivities
-            // 
-            listViewActivities.AllowDrop = true;
-            listViewActivities.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ActivityId, ActiviteitSoortActiviteit, ActiviteitBeginTijd, ActiviteitEindTijd, ActiviteitDatum });
-            listViewActivities.FullRowSelect = true;
-            listViewActivities.GridLines = true;
-            listViewActivities.Location = new System.Drawing.Point(18, 56);
-            listViewActivities.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            listViewActivities.Name = "listViewActivities";
-            listViewActivities.Size = new System.Drawing.Size(875, 408);
-            listViewActivities.TabIndex = 1;
-            listViewActivities.UseCompatibleStateImageBehavior = false;
-            listViewActivities.View = System.Windows.Forms.View.Details;
-            // 
-            // ActivityId
-            // 
-            ActivityId.Text = "Id";
-            // 
-            // ActiviteitSoortActiviteit
-            // 
-            ActiviteitSoortActiviteit.Text = "Soort activiteit";
-            ActiviteitSoortActiviteit.Width = 120;
-            // 
-            // ActiviteitBeginTijd
-            // 
-            ActiviteitBeginTijd.Text = "Begin tijd";
-            ActiviteitBeginTijd.Width = 120;
-            // 
-            // ActiviteitEindTijd
-            // 
-            ActiviteitEindTijd.Text = "Eind Tijd";
-            ActiviteitEindTijd.Width = 120;
-            // 
-            // labelActivities
-            // 
-            labelActivities.AutoSize = true;
-            labelActivities.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            labelActivities.Location = new System.Drawing.Point(15, 9);
-            labelActivities.Name = "labelActivities";
-            labelActivities.Size = new System.Drawing.Size(135, 41);
-            labelActivities.TabIndex = 0;
-            labelActivities.Text = "Activities";
-            // 
-            // ActiviteitDatum
-            // 
-            ActiviteitDatum.Text = "Datum";
-            ActiviteitDatum.Width = 120;
-            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 673);
-            Controls.Add(pnlActivities);
             Controls.Add(pnlRooms);
             Controls.Add(pnlLecturers);
             Controls.Add(menuStrip1);
@@ -498,9 +457,6 @@ namespace SomerenUI
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             pnlLecturers.ResumeLayout(false);
             pnlLecturers.PerformLayout();
-            pnlActivities.ResumeLayout(false);
-            pnlActivities.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -550,14 +506,5 @@ namespace SomerenUI
         private System.Windows.Forms.ColumnHeader lastNameLecturer;
         private System.Windows.Forms.ColumnHeader telephoneNumberL;
         private System.Windows.Forms.ColumnHeader AgeLecturer;
-        private System.Windows.Forms.Panel pnlActivities;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.ListView listViewActivities;
-        private System.Windows.Forms.ColumnHeader ActivityId;
-        private System.Windows.Forms.ColumnHeader ActiviteitSoortActiviteit;
-        private System.Windows.Forms.ColumnHeader ActiviteitBeginTijd;
-        private System.Windows.Forms.ColumnHeader ActiviteitEindTijd;
-        private System.Windows.Forms.Label labelActivities;
-        private System.Windows.Forms.ColumnHeader ActiviteitDatum;
     }
 }
