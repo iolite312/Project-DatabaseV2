@@ -81,8 +81,12 @@ namespace SomerenUI
             ActiviteitSoortActiviteit = new System.Windows.Forms.ColumnHeader();
             ActiviteitBeginTijd = new System.Windows.Forms.ColumnHeader();
             ActiviteitEindTijd = new System.Windows.Forms.ColumnHeader();
-            labelActivities = new System.Windows.Forms.Label();
             ActiviteitDatum = new System.Windows.Forms.ColumnHeader();
+            labelActivities = new System.Windows.Forms.Label();
+            stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            revenueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            vATReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -98,7 +102,7 @@ namespace SomerenUI
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem, stockToolStripMenuItem, ordersToolStripMenuItem, revenueToolStripMenuItem, vATReportToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -455,6 +459,11 @@ namespace SomerenUI
             ActiviteitEindTijd.Text = "Eind Tijd";
             ActiviteitEindTijd.Width = 120;
             // 
+            // ActiviteitDatum
+            // 
+            ActiviteitDatum.Text = "Datum";
+            ActiviteitDatum.Width = 120;
+            // 
             // labelActivities
             // 
             labelActivities.AutoSize = true;
@@ -465,10 +474,29 @@ namespace SomerenUI
             labelActivities.TabIndex = 0;
             labelActivities.Text = "Activities";
             // 
-            // ActiviteitDatum
+            // stockToolStripMenuItem
             // 
-            ActiviteitDatum.Text = "Datum";
-            ActiviteitDatum.Width = 120;
+            stockToolStripMenuItem.Name = "stockToolStripMenuItem";
+            stockToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            stockToolStripMenuItem.Text = "Stock";
+            // 
+            // ordersToolStripMenuItem
+            // 
+            ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
+            ordersToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
+            ordersToolStripMenuItem.Text = "Orders";
+            // 
+            // revenueToolStripMenuItem
+            // 
+            revenueToolStripMenuItem.Name = "revenueToolStripMenuItem";
+            revenueToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
+            revenueToolStripMenuItem.Text = "Revenue";
+            // 
+            // vATReportToolStripMenuItem
+            // 
+            vATReportToolStripMenuItem.Name = "vATReportToolStripMenuItem";
+            vATReportToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
+            vATReportToolStripMenuItem.Text = "VAT Report";
             // 
             // SomerenUI
             // 
@@ -559,5 +587,9 @@ namespace SomerenUI
         private System.Windows.Forms.ColumnHeader ActiviteitEindTijd;
         private System.Windows.Forms.Label labelActivities;
         private System.Windows.Forms.ColumnHeader ActiviteitDatum;
+        private System.Windows.Forms.ToolStripMenuItem stockToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ordersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem revenueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vATReportToolStripMenuItem;
     }
 }
