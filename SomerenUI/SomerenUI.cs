@@ -19,6 +19,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlRooms.Hide();
             pnlLecturers.Hide();
+            pnlActivities.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -30,6 +31,7 @@ namespace SomerenUI
             pnlDashboard.Hide();
             pnlRooms.Hide();
             pnlLecturers.Hide();
+            pnlActivities.Hide();
 
             // show students
             pnlStudents.Show();
@@ -51,6 +53,7 @@ namespace SomerenUI
             pnlDashboard.Hide();
             pnlStudents.Hide();
             pnlLecturers.Hide();
+            pnlActivities.Hide();
 
             //show rooms panel
             pnlRooms.Show();
@@ -151,6 +154,7 @@ namespace SomerenUI
             pnlDashboard.Hide();
             pnlStudents.Hide();
             pnlRooms.Hide();
+            pnlActivities.Hide();
             // show teachers
             pnlLecturers.Show();
             try
@@ -189,10 +193,66 @@ namespace SomerenUI
         }
 
 
+        private void ShowActivitiesPanel()
+        {
+            // Hide all other panels
+            pnlDashboard.Hide();
+            pnlLecturers.Hide();
+            pnlRooms.Hide();
+            pnlStudents.Hide();
+
+            // Show activities panel
+            pnlActivities.Show();
+
+            try
+            {
+                // Get and display all activities
+                List<Activiteiten> activiteiten = GetActiviteiten();
+                DisplayActiviteiten(activiteiten);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the activities: " + e.Message);
+            }
+        }
+
+        private void DisplayActiviteiten(List<Activiteiten> activiteiten)
+        {
+            // Clear existing items from the ListView
+            listViewActivities.Items.Clear();
+
+            // Add each activity to the ListView
+            foreach (Activiteiten activity in activiteiten)
+            {
+                ListViewItem li = new ListViewItem(activity.id.ToString());
+                li.SubItems.Add(activity.Soort_Activiteit);
+                li.SubItems.Add(activity.Begin_Tijd.ToString());
+                li.SubItems.Add(activity.Eind_Tijd.ToString());
+                li.SubItems.Add(activity.Datum.ToShortDateString());
+
+
+                li.Tag = activity;
+                listViewActivities.Items.Add(li);
+            }
+        }
+
+        private List<Activiteiten> GetActiviteiten()
+        {
+            ActiviteitenService activiteitenService = new ActiviteitenService();
+            List<Activiteiten> activiteiten = activiteitenService.GetActivities();
+            return activiteiten;
+        }
+
+
 
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowTeachersPanel();
+        }
+
+        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowActivitiesPanel();
         }
     }
 }
