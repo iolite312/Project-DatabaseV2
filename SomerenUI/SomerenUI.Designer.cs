@@ -40,6 +40,10 @@ namespace SomerenUI
             lecturersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             activitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             roomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            revenueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            vATReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             pnlDashboard = new System.Windows.Forms.Panel();
             lblDashboard = new System.Windows.Forms.Label();
             pnlStudents = new System.Windows.Forms.Panel();
@@ -83,10 +87,19 @@ namespace SomerenUI
             ActiviteitEindTijd = new System.Windows.Forms.ColumnHeader();
             ActiviteitDatum = new System.Windows.Forms.ColumnHeader();
             labelActivities = new System.Windows.Forms.Label();
-            stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            revenueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            vATReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            pnlStock = new System.Windows.Forms.Panel();
+            DrinksDeleteBtn = new System.Windows.Forms.Button();
+            DrinksEditBtn = new System.Windows.Forms.Button();
+            DrinksAddBtn = new System.Windows.Forms.Button();
+            pictureBoxStock = new System.Windows.Forms.PictureBox();
+            listViewStock = new System.Windows.Forms.ListView();
+            StockId = new System.Windows.Forms.ColumnHeader();
+            StockName = new System.Windows.Forms.ColumnHeader();
+            StockPrice = new System.Windows.Forms.ColumnHeader();
+            StockType = new System.Windows.Forms.ColumnHeader();
+            StockStock = new System.Windows.Forms.ColumnHeader();
+            StockStatus = new System.Windows.Forms.ColumnHeader();
+            lblStock = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -97,6 +110,8 @@ namespace SomerenUI
             pnlLecturers.SuspendLayout();
             pnlActivities.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            pnlStock.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxStock).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -158,6 +173,31 @@ namespace SomerenUI
             roomsToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             roomsToolStripMenuItem.Text = "Rooms";
             roomsToolStripMenuItem.Click += roomsToolStripMenuItem_Click;
+            // 
+            // stockToolStripMenuItem
+            // 
+            stockToolStripMenuItem.Name = "stockToolStripMenuItem";
+            stockToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            stockToolStripMenuItem.Text = "Stock";
+            stockToolStripMenuItem.Click += stockToolStripMenuItem_Click;
+            // 
+            // ordersToolStripMenuItem
+            // 
+            ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
+            ordersToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
+            ordersToolStripMenuItem.Text = "Orders";
+            // 
+            // revenueToolStripMenuItem
+            // 
+            revenueToolStripMenuItem.Name = "revenueToolStripMenuItem";
+            revenueToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
+            revenueToolStripMenuItem.Text = "Revenue";
+            // 
+            // vATReportToolStripMenuItem
+            // 
+            vATReportToolStripMenuItem.Name = "vATReportToolStripMenuItem";
+            vATReportToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
+            vATReportToolStripMenuItem.Text = "VAT Report";
             // 
             // pnlDashboard
             // 
@@ -474,35 +514,118 @@ namespace SomerenUI
             labelActivities.TabIndex = 0;
             labelActivities.Text = "Activities";
             // 
-            // stockToolStripMenuItem
+            // pnlStock
             // 
-            stockToolStripMenuItem.Name = "stockToolStripMenuItem";
-            stockToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
-            stockToolStripMenuItem.Text = "Stock";
+            pnlStock.Controls.Add(DrinksDeleteBtn);
+            pnlStock.Controls.Add(DrinksEditBtn);
+            pnlStock.Controls.Add(DrinksAddBtn);
+            pnlStock.Controls.Add(pictureBoxStock);
+            pnlStock.Controls.Add(listViewStock);
+            pnlStock.Controls.Add(lblStock);
+            pnlStock.Location = new System.Drawing.Point(9, 34);
+            pnlStock.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pnlStock.Name = "pnlStock";
+            pnlStock.Size = new System.Drawing.Size(1072, 617);
+            pnlStock.TabIndex = 6;
             // 
-            // ordersToolStripMenuItem
+            // DrinksDeleteBtn
             // 
-            ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
-            ordersToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
-            ordersToolStripMenuItem.Text = "Orders";
+            DrinksDeleteBtn.Location = new System.Drawing.Point(920, 304);
+            DrinksDeleteBtn.Name = "DrinksDeleteBtn";
+            DrinksDeleteBtn.Size = new System.Drawing.Size(94, 29);
+            DrinksDeleteBtn.TabIndex = 7;
+            DrinksDeleteBtn.Text = "Delete";
+            DrinksDeleteBtn.UseVisualStyleBackColor = true;
+            DrinksDeleteBtn.Click += DrinksDeleteBtn_Click;
             // 
-            // revenueToolStripMenuItem
+            // DrinksEditBtn
             // 
-            revenueToolStripMenuItem.Name = "revenueToolStripMenuItem";
-            revenueToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
-            revenueToolStripMenuItem.Text = "Revenue";
+            DrinksEditBtn.Location = new System.Drawing.Point(920, 269);
+            DrinksEditBtn.Name = "DrinksEditBtn";
+            DrinksEditBtn.Size = new System.Drawing.Size(94, 29);
+            DrinksEditBtn.TabIndex = 6;
+            DrinksEditBtn.Text = "Edit";
+            DrinksEditBtn.UseVisualStyleBackColor = true;
+            DrinksEditBtn.Click += DrinksEditBtn_Click;
             // 
-            // vATReportToolStripMenuItem
+            // DrinksAddBtn
             // 
-            vATReportToolStripMenuItem.Name = "vATReportToolStripMenuItem";
-            vATReportToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
-            vATReportToolStripMenuItem.Text = "VAT Report";
+            DrinksAddBtn.Location = new System.Drawing.Point(920, 234);
+            DrinksAddBtn.Name = "DrinksAddBtn";
+            DrinksAddBtn.Size = new System.Drawing.Size(94, 29);
+            DrinksAddBtn.TabIndex = 5;
+            DrinksAddBtn.Text = "Add";
+            DrinksAddBtn.UseVisualStyleBackColor = true;
+            DrinksAddBtn.Click += DrinksAddBtn_Click;
+            // 
+            // pictureBoxStock
+            // 
+            pictureBoxStock.Image = (System.Drawing.Image)resources.GetObject("pictureBoxStock.Image");
+            pictureBoxStock.Location = new System.Drawing.Point(920, 9);
+            pictureBoxStock.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBoxStock.Name = "pictureBoxStock";
+            pictureBoxStock.Size = new System.Drawing.Size(149, 164);
+            pictureBoxStock.TabIndex = 4;
+            pictureBoxStock.TabStop = false;
+            // 
+            // listViewStock
+            // 
+            listViewStock.AllowDrop = true;
+            listViewStock.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { StockId, StockName, StockPrice, StockType, StockStock, StockStatus });
+            listViewStock.FullRowSelect = true;
+            listViewStock.GridLines = true;
+            listViewStock.Location = new System.Drawing.Point(18, 56);
+            listViewStock.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listViewStock.Name = "listViewStock";
+            listViewStock.Size = new System.Drawing.Size(875, 408);
+            listViewStock.TabIndex = 1;
+            listViewStock.UseCompatibleStateImageBehavior = false;
+            listViewStock.View = System.Windows.Forms.View.Details;
+            // 
+            // StockId
+            // 
+            StockId.Text = "Id";
+            // 
+            // StockName
+            // 
+            StockName.Text = "Name";
+            StockName.Width = 120;
+            // 
+            // StockPrice
+            // 
+            StockPrice.Text = "Price";
+            // 
+            // StockType
+            // 
+            StockType.Text = "Type";
+            StockType.Width = 120;
+            // 
+            // StockStock
+            // 
+            StockStock.Text = "Stock";
+            StockStock.Width = 120;
+            // 
+            // StockStatus
+            // 
+            StockStatus.Text = "Status";
+            StockStatus.Width = 200;
+            // 
+            // lblStock
+            // 
+            lblStock.AutoSize = true;
+            lblStock.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblStock.Location = new System.Drawing.Point(15, 9);
+            lblStock.Name = "lblStock";
+            lblStock.Size = new System.Drawing.Size(90, 41);
+            lblStock.TabIndex = 0;
+            lblStock.Text = "Stock";
             // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 673);
+            Controls.Add(pnlStock);
             Controls.Add(pnlActivities);
             Controls.Add(pnlRooms);
             Controls.Add(pnlLecturers);
@@ -529,6 +652,9 @@ namespace SomerenUI
             pnlActivities.ResumeLayout(false);
             pnlActivities.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            pnlStock.ResumeLayout(false);
+            pnlStock.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxStock).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -591,5 +717,18 @@ namespace SomerenUI
         private System.Windows.Forms.ToolStripMenuItem ordersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem revenueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vATReportToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlStock;
+        private System.Windows.Forms.PictureBox pictureBoxStock;
+        private System.Windows.Forms.ListView listViewStock;
+        private System.Windows.Forms.ColumnHeader StockId;
+        private System.Windows.Forms.ColumnHeader StockName;
+        private System.Windows.Forms.ColumnHeader StockPrice;
+        private System.Windows.Forms.ColumnHeader StockType;
+        private System.Windows.Forms.ColumnHeader StockStock;
+        private System.Windows.Forms.Label lblStock;
+        private System.Windows.Forms.ColumnHeader StockStatus;
+        private System.Windows.Forms.Button DrinksDeleteBtn;
+        private System.Windows.Forms.Button DrinksEditBtn;
+        private System.Windows.Forms.Button DrinksAddBtn;
     }
 }
