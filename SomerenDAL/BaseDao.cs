@@ -65,6 +65,29 @@ namespace SomerenDAL
         }
 
         /* For Insert/Update/Delete Queries */
+        protected void ExecuteAddQuery(string query, SqlParameter[] sqlParameters, out int id)
+        {
+            SqlCommand command = new SqlCommand();
+
+            try
+            {
+                command.Connection = OpenConnection();
+                command.CommandText = query;
+                command.Parameters.AddRange(sqlParameters);
+                adapter.InsertCommand = command;
+                id = (int)command.ExecuteScalar();
+            }
+            catch (SqlException e)
+            {
+                // Print.ErrorLog(e);
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+
         protected void ExecuteEditQuery(string query, SqlParameter[] sqlParameters)
         {
             SqlCommand command = new SqlCommand();
@@ -117,5 +140,8 @@ namespace SomerenDAL
 
             return dataTable;
         }
+
+        
+       
     }
 }

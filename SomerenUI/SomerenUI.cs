@@ -11,7 +11,10 @@ namespace SomerenUI
         public SomerenUI()
         {
             InitializeComponent();
+            ShowDashboardPanel();
         }
+
+
 
         private void ShowDashboardPanel()
         {
@@ -20,6 +23,7 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
+            pnlStock.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -32,7 +36,7 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
-
+            pnlStock.Hide();
             // show students
             pnlStudents.Show();
 
@@ -54,7 +58,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
-
+            pnlStock.Hide();
             //show rooms panel
             pnlRooms.Show();
             try
@@ -155,6 +159,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlRooms.Hide();
             pnlActivities.Hide();
+            pnlStock.Hide();
             // show teachers
             pnlLecturers.Show();
             try
@@ -200,7 +205,7 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlRooms.Hide();
             pnlStudents.Hide();
-
+            pnlStock.Hide();
             // Show activities panel
             pnlActivities.Show();
 
@@ -243,6 +248,54 @@ namespace SomerenUI
             return activiteiten;
         }
 
+        /* Show stock */
+
+        private void ShowStockPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            pnlRooms.Hide();
+            pnlActivities.Hide();
+            pnlLecturers.Hide();
+            // show stock
+            pnlStock.Show();
+            try
+            {
+                // get and display all teachers
+                List<Drinks> drinks = GetDrinks();
+                DisplayDrinks(drinks);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the stock: " + e.Message);
+            }
+        }
+
+        private List<Drinks> GetDrinks()
+        {
+            DrinksService drinksService = new DrinksService();
+            List<Drinks> drinks = drinksService.GetDrinks();
+            return drinks;
+        }
+
+        private void DisplayDrinks(List<Drinks> drinks)
+        {
+            // clear the listview before filling it
+            listViewStock.Items.Clear();
+            foreach (Drinks drink in drinks)
+            {
+                ListViewItem li = new ListViewItem(drink.Id.ToString());
+                li.SubItems.Add(drink.name.ToString());
+                li.SubItems.Add(drink.price.ToString());
+                li.SubItems.Add(drink.Type);
+                li.SubItems.Add(drink.stock.ToString());
+                li.SubItems.Add(drink.stockStatus);
+                li.Tag = drink;   // link drink object to listview item
+                listViewStock.Items.Add(li);
+            }
+        }
+
 
 
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -253,6 +306,32 @@ namespace SomerenUI
         private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowActivitiesPanel();
+        }
+
+        private void stockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowStockPanel();
+        }
+
+        private void DrinksAddBtn_Click(object sender, EventArgs e)
+        {
+            AddDrink addDrinksForm = new AddDrink();
+            addDrinksForm.ShowDialog();
+            ShowStockPanel();
+        }
+
+        private void DrinksEditBtn_Click(object sender, EventArgs e)
+        {
+            EditDrink EditDrinkForm = new EditDrink();
+            EditDrinkForm.ShowDialog();
+            ShowStockPanel();
+        }
+
+        private void DrinksDeleteBtn_Click(object sender, EventArgs e)
+        {
+            DeleteDrink deleteDrinkForm = new DeleteDrink();
+            deleteDrinkForm.ShowDialog();
+            ShowStockPanel();
         }
     }
 }
