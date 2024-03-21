@@ -100,6 +100,16 @@ namespace SomerenUI
             StockStock = new System.Windows.Forms.ColumnHeader();
             StockStatus = new System.Windows.Forms.ColumnHeader();
             lblStock = new System.Windows.Forms.Label();
+            pnlOrders = new System.Windows.Forms.Panel();
+            orderPlacebtn = new System.Windows.Forms.Button();
+            comboCount = new System.Windows.Forms.ComboBox();
+            comboDrinks = new System.Windows.Forms.ComboBox();
+            comboStudent = new System.Windows.Forms.ComboBox();
+            orderCountlbl = new System.Windows.Forms.Label();
+            orderDrinklbl = new System.Windows.Forms.Label();
+            orderStudentlbl = new System.Windows.Forms.Label();
+            pictureBox5 = new System.Windows.Forms.PictureBox();
+            label3 = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -112,6 +122,8 @@ namespace SomerenUI
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             pnlStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxStock).BeginInit();
+            pnlOrders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -186,6 +198,7 @@ namespace SomerenUI
             ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
             ordersToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             ordersToolStripMenuItem.Text = "Orders";
+            ordersToolStripMenuItem.Click += ordersToolStripMenuItem_Click;
             // 
             // revenueToolStripMenuItem
             // 
@@ -620,11 +633,111 @@ namespace SomerenUI
             lblStock.TabIndex = 0;
             lblStock.Text = "Stock";
             // 
+            // pnlOrders
+            // 
+            pnlOrders.Controls.Add(orderPlacebtn);
+            pnlOrders.Controls.Add(comboCount);
+            pnlOrders.Controls.Add(comboDrinks);
+            pnlOrders.Controls.Add(comboStudent);
+            pnlOrders.Controls.Add(orderCountlbl);
+            pnlOrders.Controls.Add(orderDrinklbl);
+            pnlOrders.Controls.Add(orderStudentlbl);
+            pnlOrders.Controls.Add(pictureBox5);
+            pnlOrders.Controls.Add(label3);
+            pnlOrders.Location = new System.Drawing.Point(9, 30);
+            pnlOrders.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pnlOrders.Name = "pnlOrders";
+            pnlOrders.Size = new System.Drawing.Size(1072, 624);
+            pnlOrders.TabIndex = 8;
+            // 
+            // orderPlacebtn
+            // 
+            orderPlacebtn.Location = new System.Drawing.Point(769, 101);
+            orderPlacebtn.Name = "orderPlacebtn";
+            orderPlacebtn.Size = new System.Drawing.Size(94, 29);
+            orderPlacebtn.TabIndex = 11;
+            orderPlacebtn.Text = "Place Order";
+            orderPlacebtn.UseVisualStyleBackColor = true;
+            orderPlacebtn.Click += orderPlacebtn_Click;
+            // 
+            // comboCount
+            // 
+            comboCount.FormattingEnabled = true;
+            comboCount.Location = new System.Drawing.Point(598, 102);
+            comboCount.Name = "comboCount";
+            comboCount.Size = new System.Drawing.Size(151, 28);
+            comboCount.TabIndex = 10;
+            // 
+            // comboDrinks
+            // 
+            comboDrinks.FormattingEnabled = true;
+            comboDrinks.Location = new System.Drawing.Point(383, 102);
+            comboDrinks.Name = "comboDrinks";
+            comboDrinks.Size = new System.Drawing.Size(151, 28);
+            comboDrinks.TabIndex = 9;
+            comboDrinks.SelectedIndexChanged += comboDrinks_SelectedIndexChanged;
+            // 
+            // comboStudent
+            // 
+            comboStudent.FormattingEnabled = true;
+            comboStudent.Location = new System.Drawing.Point(87, 102);
+            comboStudent.Name = "comboStudent";
+            comboStudent.Size = new System.Drawing.Size(195, 28);
+            comboStudent.TabIndex = 8;
+            // 
+            // orderCountlbl
+            // 
+            orderCountlbl.AutoSize = true;
+            orderCountlbl.Location = new System.Drawing.Point(540, 105);
+            orderCountlbl.Name = "orderCountlbl";
+            orderCountlbl.Size = new System.Drawing.Size(52, 20);
+            orderCountlbl.TabIndex = 7;
+            orderCountlbl.Text = "Aantal";
+            // 
+            // orderDrinklbl
+            // 
+            orderDrinklbl.AutoSize = true;
+            orderDrinklbl.Location = new System.Drawing.Point(289, 105);
+            orderDrinklbl.Name = "orderDrinklbl";
+            orderDrinklbl.Size = new System.Drawing.Size(88, 20);
+            orderDrinklbl.TabIndex = 6;
+            orderDrinklbl.Text = "Soort Drank";
+            // 
+            // orderStudentlbl
+            // 
+            orderStudentlbl.AutoSize = true;
+            orderStudentlbl.Location = new System.Drawing.Point(21, 105);
+            orderStudentlbl.Name = "orderStudentlbl";
+            orderStudentlbl.Size = new System.Drawing.Size(60, 20);
+            orderStudentlbl.TabIndex = 5;
+            orderStudentlbl.Text = "Student";
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = (System.Drawing.Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new System.Drawing.Point(920, 9);
+            pictureBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new System.Drawing.Size(149, 164);
+            pictureBox5.TabIndex = 4;
+            pictureBox5.TabStop = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label3.Location = new System.Drawing.Point(15, 9);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(108, 41);
+            label3.TabIndex = 0;
+            label3.Text = "Orders";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 673);
+            Controls.Add(pnlOrders);
             Controls.Add(pnlStock);
             Controls.Add(pnlActivities);
             Controls.Add(pnlRooms);
@@ -655,6 +768,9 @@ namespace SomerenUI
             pnlStock.ResumeLayout(false);
             pnlStock.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxStock).EndInit();
+            pnlOrders.ResumeLayout(false);
+            pnlOrders.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -730,5 +846,15 @@ namespace SomerenUI
         private System.Windows.Forms.Button DrinksDeleteBtn;
         private System.Windows.Forms.Button DrinksEditBtn;
         private System.Windows.Forms.Button DrinksAddBtn;
+        private System.Windows.Forms.Panel pnlOrders;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboCount;
+        private System.Windows.Forms.ComboBox comboDrinks;
+        private System.Windows.Forms.ComboBox comboStudent;
+        private System.Windows.Forms.Label orderCountlbl;
+        private System.Windows.Forms.Label orderDrinklbl;
+        private System.Windows.Forms.Label orderStudentlbl;
+        private System.Windows.Forms.Button orderPlacebtn;
     }
 }

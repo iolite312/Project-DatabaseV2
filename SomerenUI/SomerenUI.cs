@@ -258,6 +258,7 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlActivities.Hide();
             pnlLecturers.Hide();
+            pnlOrders.Hide();
             // show stock
             pnlStock.Show();
             try
@@ -332,6 +333,95 @@ namespace SomerenUI
             DeleteDrink deleteDrinkForm = new DeleteDrink();
             deleteDrinkForm.ShowDialog();
             ShowStockPanel();
+        }
+
+        private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowOrderPanel();
+        }
+        private void ShowOrderPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            pnlRooms.Hide();
+            pnlActivities.Hide();
+            pnlLecturers.Hide();
+            pnlStock.Hide();
+            // show Orders
+            pnlOrders.Show();
+            try
+            {
+                DisplayOrders();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the Orders: " + e.Message);
+            }
+        }
+        private void DisplayOrders()
+        {
+            List<Student> students = GetStudents();
+            List<Drinks> drinks = GetDrinks();
+            foreach (Student student in students)
+            {
+                comboStudent.Items.Add($"{student.FullName}");
+
+            }
+            foreach (Drinks drink in drinks)
+            {
+                comboDrinks.Items.Add($"{drink.name}");
+            }
+        }
+
+        private void comboDrinks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DrinksService drinksService = new DrinksService();
+            int currentDrink = comboDrinks.SelectedIndex;
+            Drinks fullDrink = drinksService.GetDrinkById(currentDrink + 1);
+            for (int i = 0; fullDrink.stock >= i; i++)
+            {
+                comboCount.Items.Add(i);
+            }
+
+        }
+
+        private void orderPlacebtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OrderService orderService = new OrderService();
+                DrinksService drinksService = new DrinksService();
+                List<Student> students = GetStudents();
+                Student currentStudent = students[comboStudent.SelectedIndex];
+                Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
+                int totalDrinks = CheckOrderCount();
+                Order order = new Order(fullDrink.Id, currentStudent.Number, DateTime.Now, totalDrinks);
+                orderService.InsertOrder(order, fullDrink);
+                ClearOrderScreen();
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void ClearOrderScreen()
+        {
+            MessageBox.Show("Order was a succes!");
+            comboCount.Items.Clear();
+            comboStudent.Items.Clear();
+            comboDrinks.Items.Clear();
+            comboCount.ResetText();
+            comboStudent.ResetText();
+            comboDrinks.ResetText();
+            DisplayOrders();
+        }
+        private int CheckOrderCount()
+        {
+            if ((int)comboCount.SelectedItem == 0)
+            {
+                throw new Exception("Select a higher count than 0");
+            }
+            return (int)comboCount.SelectedItem;
         }
     }
 }
