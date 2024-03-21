@@ -399,7 +399,7 @@ namespace SomerenUI
             // 
             // firstnameLecturer
             // 
-            firstnameLecturer.Text = "first name";
+            firstnameLecturer.Text = "First name";
             firstnameLecturer.Width = 150;
             // 
             // lastNameLecturer
@@ -409,7 +409,7 @@ namespace SomerenUI
             // 
             // telephoneNumberL
             // 
-            telephoneNumberL.Text = "Telephon number";
+            telephoneNumberL.Text = "Telephone number";
             telephoneNumberL.Width = 150;
             // 
             // AgeLecturer
