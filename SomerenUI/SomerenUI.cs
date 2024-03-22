@@ -3,6 +3,7 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using System.Data.SqlTypes;
 
 namespace SomerenUI
 {
@@ -200,6 +201,7 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlRooms.Hide();
             pnlStudents.Hide();
+            pnlRevenue.Hide();
 
             // Show activities panel
             pnlActivities.Show();
@@ -243,7 +245,74 @@ namespace SomerenUI
             return activiteiten;
         }
 
+        private void submitDate()
+        {
+            DateTime startDate = dtpStartDate.Value.Date;
+            DateTime endDate = dtpEndDate.Value.Date;
+            if (startDate < endDate)
+            {
+                lblDateSelect.Text = ($"Selected period: {startDate.ToString("dd/MM/yyyy")} - {endDate.ToString("dd/MM/yyyy")}");
 
+                try
+                {
+                    List<Revenue> revenues = GetSales(startDate, endDate);
+                    displayRev(revenues);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Something went wrong while loading the revenue: " + e.Message);
+                }
+
+            }
+            else
+            {
+        MessageBox.Show("Invalid Period: Please select dates within the valid range.");
+            }
+
+        }
+        private List<Revenue> GetSales(DateTime startDate, DateTime endDate)
+        {
+            RevenueService revenueService = new();
+            if (startDate < SqlDateTime.MinValue.Value)
+            {
+                startDate = SqlDateTime.MinValue.Value;
+            }
+            if (endDate > SqlDateTime.MaxValue.Value)
+            {
+                endDate = SqlDateTime.MaxValue.Value;
+            }
+            List<Revenue> revenues = revenueService.GetRangeDate(startDate, endDate);
+            return revenues;
+        }
+
+        private void displayRev(List<Revenue> Sales)
+        {
+            lvRevenue.Items.Clear();
+
+            foreach (Revenue rev in Sales)
+            {
+                ListViewItem item = new ListViewItem(rev.numberOfCustomer.ToString());
+                item.SubItems.Add(rev.sales.ToString());
+                item.SubItems.Add(rev.turnOver.ToString("0.00"));
+                lvRevenue.Items.Add(item);
+            }
+
+            lvRevenue.Show();
+
+        }
+        private void DisplayRevenue()
+        {
+            // Hide all other panels
+            pnlDashboard.Hide();
+            pnlLecturers.Hide();
+            pnlRooms.Hide();
+            pnlStudents.Hide();
+            pnlActivities.Hide();
+
+            // Show activities panel
+            pnlRevenue.Show();
+
+        }
 
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -253,6 +322,18 @@ namespace SomerenUI
         private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowActivitiesPanel();
+        }
+
+        private void revenueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            DisplayRevenue();
+
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            submitDate();
         }
     }
 }
