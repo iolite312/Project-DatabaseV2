@@ -21,7 +21,6 @@ namespace SomerenDAL
         private List<Activiteiten> ReadActivities(DataTable dataTable)
         {
             List<Activiteiten> activities = new List<Activiteiten>();
-
             foreach (DataRow dr in dataTable.Rows)
             {
                 Activiteiten activity = new Activiteiten()
