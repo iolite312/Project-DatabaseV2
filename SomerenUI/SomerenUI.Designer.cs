@@ -40,6 +40,10 @@ namespace SomerenUI
             lecturersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             activitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             roomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            revenueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            vATReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             pnlDashboard = new System.Windows.Forms.Panel();
             lblDashboard = new System.Windows.Forms.Label();
             pnlStudents = new System.Windows.Forms.Panel();
@@ -83,10 +87,22 @@ namespace SomerenUI
             ActiviteitEindTijd = new System.Windows.Forms.ColumnHeader();
             ActiviteitDatum = new System.Windows.Forms.ColumnHeader();
             labelActivities = new System.Windows.Forms.Label();
-            stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            revenueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            vATReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            pnlVATReport = new System.Windows.Forms.Panel();
+            button1 = new System.Windows.Forms.Button();
+            textBoxQuarter = new System.Windows.Forms.TextBox();
+            textBoxYear = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            pictureBox5 = new System.Windows.Forms.PictureBox();
+            listViewVATReport = new System.Windows.Forms.ListView();
+            columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            label3 = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -97,6 +113,8 @@ namespace SomerenUI
             pnlLecturers.SuspendLayout();
             pnlActivities.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            pnlVATReport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -158,6 +176,31 @@ namespace SomerenUI
             roomsToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             roomsToolStripMenuItem.Text = "Rooms";
             roomsToolStripMenuItem.Click += roomsToolStripMenuItem_Click;
+            // 
+            // stockToolStripMenuItem
+            // 
+            stockToolStripMenuItem.Name = "stockToolStripMenuItem";
+            stockToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            stockToolStripMenuItem.Text = "Stock";
+            // 
+            // ordersToolStripMenuItem
+            // 
+            ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
+            ordersToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
+            ordersToolStripMenuItem.Text = "Orders";
+            // 
+            // revenueToolStripMenuItem
+            // 
+            revenueToolStripMenuItem.Name = "revenueToolStripMenuItem";
+            revenueToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
+            revenueToolStripMenuItem.Text = "Revenue";
+            // 
+            // vATReportToolStripMenuItem
+            // 
+            vATReportToolStripMenuItem.Name = "vATReportToolStripMenuItem";
+            vATReportToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
+            vATReportToolStripMenuItem.Text = "VAT Report";
+            vATReportToolStripMenuItem.Click += vATReportToolStripMenuItem_Click;
             // 
             // pnlDashboard
             // 
@@ -432,7 +475,7 @@ namespace SomerenUI
             listViewActivities.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ActivityId, ActiviteitSoortActiviteit, ActiviteitBeginTijd, ActiviteitEindTijd, ActiviteitDatum });
             listViewActivities.FullRowSelect = true;
             listViewActivities.GridLines = true;
-            listViewActivities.Location = new System.Drawing.Point(18, 56);
+            listViewActivities.Location = new System.Drawing.Point(21, 57);
             listViewActivities.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listViewActivities.Name = "listViewActivities";
             listViewActivities.Size = new System.Drawing.Size(875, 408);
@@ -474,35 +517,140 @@ namespace SomerenUI
             labelActivities.TabIndex = 0;
             labelActivities.Text = "Activities";
             // 
-            // stockToolStripMenuItem
+            // pnlVATReport
             // 
-            stockToolStripMenuItem.Name = "stockToolStripMenuItem";
-            stockToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
-            stockToolStripMenuItem.Text = "Stock";
+            pnlVATReport.Controls.Add(button1);
+            pnlVATReport.Controls.Add(textBoxQuarter);
+            pnlVATReport.Controls.Add(textBoxYear);
+            pnlVATReport.Controls.Add(label5);
+            pnlVATReport.Controls.Add(label4);
+            pnlVATReport.Controls.Add(pictureBox5);
+            pnlVATReport.Controls.Add(listViewVATReport);
+            pnlVATReport.Controls.Add(label3);
+            pnlVATReport.Location = new System.Drawing.Point(13, 31);
+            pnlVATReport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pnlVATReport.Name = "pnlVATReport";
+            pnlVATReport.Size = new System.Drawing.Size(1072, 651);
+            pnlVATReport.TabIndex = 6;
             // 
-            // ordersToolStripMenuItem
+            // button1
             // 
-            ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
-            ordersToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
-            ordersToolStripMenuItem.Text = "Orders";
+            button1.Location = new System.Drawing.Point(153, 167);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(94, 29);
+            button1.TabIndex = 9;
+            button1.Text = "Calculate";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // revenueToolStripMenuItem
+            // textBoxQuarter
             // 
-            revenueToolStripMenuItem.Name = "revenueToolStripMenuItem";
-            revenueToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
-            revenueToolStripMenuItem.Text = "Revenue";
+            textBoxQuarter.Location = new System.Drawing.Point(189, 115);
+            textBoxQuarter.Name = "textBoxQuarter";
+            textBoxQuarter.Size = new System.Drawing.Size(27, 27);
+            textBoxQuarter.TabIndex = 8;
             // 
-            // vATReportToolStripMenuItem
+            // textBoxYear
             // 
-            vATReportToolStripMenuItem.Name = "vATReportToolStripMenuItem";
-            vATReportToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
-            vATReportToolStripMenuItem.Text = "VAT Report";
+            textBoxYear.Location = new System.Drawing.Point(189, 75);
+            textBoxYear.Name = "textBoxYear";
+            textBoxYear.Size = new System.Drawing.Size(58, 27);
+            textBoxYear.TabIndex = 7;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(20, 118);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(121, 20);
+            label5.TabIndex = 6;
+            label5.Text = "Quarter number :";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(20, 75);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(44, 20);
+            label4.TabIndex = 5;
+            label4.Text = "Year :";
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = (System.Drawing.Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new System.Drawing.Point(920, 9);
+            pictureBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new System.Drawing.Size(149, 164);
+            pictureBox5.TabIndex = 4;
+            pictureBox5.TabStop = false;
+            // 
+            // listViewVATReport
+            // 
+            listViewVATReport.AllowDrop = true;
+            listViewVATReport.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
+            listViewVATReport.FullRowSelect = true;
+            listViewVATReport.GridLines = true;
+            listViewVATReport.Location = new System.Drawing.Point(20, 239);
+            listViewVATReport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listViewVATReport.Name = "listViewVATReport";
+            listViewVATReport.Size = new System.Drawing.Size(916, 358);
+            listViewVATReport.TabIndex = 1;
+            listViewVATReport.UseCompatibleStateImageBehavior = false;
+            listViewVATReport.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Year";
+            columnHeader1.Width = 100;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Quarter";
+            columnHeader2.Width = 120;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "BeginQuarter";
+            columnHeader3.Width = 120;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "EndQuarter";
+            columnHeader4.Width = 120;
+            // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "VAT Low (6%)";
+            columnHeader5.Width = 150;
+            // 
+            // columnHeader6
+            // 
+            columnHeader6.Tag = "";
+            columnHeader6.Text = "VAT High (21%)";
+            columnHeader6.Width = 150;
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Total VAT";
+            columnHeader7.Width = 150;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label3.Location = new System.Drawing.Point(15, 9);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(165, 41);
+            label3.TabIndex = 0;
+            label3.Text = "VAT Report";
             // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1099, 673);
+            ClientSize = new System.Drawing.Size(1099, 696);
+            Controls.Add(pnlVATReport);
             Controls.Add(pnlActivities);
             Controls.Add(pnlRooms);
             Controls.Add(pnlLecturers);
@@ -529,6 +677,9 @@ namespace SomerenUI
             pnlActivities.ResumeLayout(false);
             pnlActivities.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            pnlVATReport.ResumeLayout(false);
+            pnlVATReport.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -591,5 +742,21 @@ namespace SomerenUI
         private System.Windows.Forms.ToolStripMenuItem ordersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem revenueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vATReportToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlVATReport;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.ListView listViewVATReport;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.TextBox textBoxQuarter;
+        private System.Windows.Forms.TextBox textBoxYear;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.Button button1;
     }
 }

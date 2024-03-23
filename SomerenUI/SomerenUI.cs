@@ -3,6 +3,8 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using SomerenDAL;
+using static SomerenModel.Drank;
 
 namespace SomerenUI
 {
@@ -20,6 +22,7 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -32,6 +35,7 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
 
             // show students
             pnlStudents.Show();
@@ -54,6 +58,8 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
+
 
             //show rooms panel
             pnlRooms.Show();
@@ -145,9 +151,7 @@ namespace SomerenUI
         }
 
 
-
         /* Show Teachers*/
-
         private void ShowTeachersPanel()
         {
             // hide all other panels
@@ -155,6 +159,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlRooms.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
             // show teachers
             pnlLecturers.Show();
             try
@@ -200,7 +205,7 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlRooms.Hide();
             pnlStudents.Hide();
-
+            pnlVATReport.Hide();
             // Show activities panel
             pnlActivities.Show();
 
@@ -243,6 +248,152 @@ namespace SomerenUI
             return activiteiten;
         }
 
+        private void ShowVATReportPanel()
+        {
+            pnlActivities.Hide();
+            pnlDashboard.Hide();
+            pnlLecturers.Hide();
+            pnlRooms.Hide();
+            pnlStudents.Hide();
+            pnlVATReport.Show();
+
+            // Validate year
+            int year;
+            if (!int.TryParse(textBoxYear.Text, out year) || !Drank.ValidationYear.IsValidYear(year))
+            {
+
+            }
+
+            // Proceed with other validations
+            string quarter = textBoxQuarter.Text.ToUpper();
+            if (string.IsNullOrEmpty(quarter) || !(quarter == "1" || quarter == "2" || quarter == "3" || quarter == "Q4"))
+            {
+
+            }
+
+            try
+            {
+                // Retrieve drinks for the specified quarter using DrankDao
+                DrankDao drankDao = new DrankDao();
+                List<Drank> drinks = drankDao.GetDrankenForQuarter(year, quarter);
+
+                // Create an instance of DrankService
+                SomerenService.DrankService drankService = new SomerenService.DrankService();
+
+                // Calculate quarter dates using DrankService method
+                Tuple<DateTime, DateTime> quarterDates = drankService.CalculateQuarterDates(year, quarter);
+
+                // Display quarter dates in ListView
+                DisplayQuarterDates(year, quarter);
+
+                // Display VAT report
+                DisplayVATReport(drinks);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+
+
+        private void DisplayQuarterDates(int year, string quarter)
+        {
+            // Create an instance of DrankService
+            SomerenService.DrankService drankService = new SomerenService.DrankService();
+
+            // Calculate quarter dates
+            var quarterDates = drankService.CalculateQuarterDates(year, quarter);
+
+            // Retrieve drinks sold in the specified quarter
+            DrankDao drankDao = new DrankDao();
+            List<Drank> drinks = drankDao.GetDrankenForQuarter(year, quarter);
+
+            // Calculate total VAT for all drinks in the quarter
+            decimal totalVATLow = 0;
+            decimal totalVATHigh = 0;
+            foreach (Drank drink in drinks)
+            {
+                // Calculate VAT for the drink using the CalculateVAT method of the Drank class
+                decimal vat = drink.CalculateVAT();
+
+                // Accumulate VAT amounts based on whether the drink is alcoholic
+                if (drink.IsAlcoholic)
+                {
+                    totalVATHigh += vat; // Accumulate VAT for high (21%)
+                }
+                else
+                {
+                    totalVATLow += vat; // Accumulate VAT for low (6%)
+                }
+
+            }
+
+            // Add begin and end dates, along with VAT, to the ListView
+            ListViewItem item = new ListViewItem(new[]
+            {
+    year.ToString(),
+    quarter,
+    quarterDates.Item1.ToShortDateString(),
+    quarterDates.Item2.ToShortDateString(),
+    totalVATLow.ToString("C"), // VAT Low (6%)
+    totalVATHigh.ToString("C"), // VAT High (21%)
+    (totalVATLow + totalVATHigh).ToString("C") // TOTAL VAT
+});
+
+            listViewVATReport.Items.Clear(); // Clear all items first
+            listViewVATReport.Items.Add(item);
+        }
+
+
+
+
+
+
+
+
+        private void DisplayVATReport(List<Drank> drinks)
+        {
+            // Variables to accumulate VAT amounts
+            decimal totalVATLow = 0;
+            decimal totalVATHigh = 0;
+
+            // Clear the ListView before populating
+            listViewVATReport.Items.Clear();
+
+            foreach (Drank drink in drinks)
+            {
+                // Get VAT amount directly from the CalculateVAT method of the Drank class
+                decimal vatAmount = drink.CalculateVAT();
+
+                // Accumulate VAT amounts based on whether the drink is alcoholic
+                if (drink.IsAlcoholic)
+                {
+                    totalVATHigh += vatAmount; // Accumulate VAT for high (21%)
+                }
+                else
+                {
+                    totalVATLow += vatAmount; // Accumulate VAT for low (6%)
+                }
+
+
+                // Update total VAT amounts
+                totalVATLow += drink.IsAlcoholic ? 0 : vatAmount;
+                totalVATHigh += drink.IsAlcoholic ? vatAmount : 0;
+            }
+
+            // Add total row to the ListView
+            ListViewItem totalItem = new ListViewItem(new[]
+            {
+        "","","","",
+        totalVATLow.ToString("C"), // VAT Low (6%)
+        totalVATHigh.ToString("C"), // VAT High (21%)
+        (totalVATLow + totalVATHigh).ToString("C") // TOTALVAT
+    });
+
+            listViewVATReport.Items.Add(totalItem); // Add total item to the ListView
+        }
+
 
 
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -254,5 +405,44 @@ namespace SomerenUI
         {
             ShowActivitiesPanel();
         }
+
+        private void vATReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowVATReportPanel();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Validate input
+            if (string.IsNullOrWhiteSpace(textBoxYear.Text) || string.IsNullOrWhiteSpace(textBoxQuarter.Text))
+            {
+                MessageBox.Show("Please enter both year and quarter.");
+                return;
+            }
+
+            int year;
+            if (!int.TryParse(textBoxYear.Text, out year))
+            {
+                MessageBox.Show("Please enter a valid year.");
+                return;
+            }
+
+            if (!ValidationYear.IsValidYear(year))
+            {
+                MessageBox.Show("There is only data available for 2024");
+                return;
+            }
+
+            string quarter = textBoxQuarter.Text.ToUpper();
+            if (quarter != "1" && quarter != "2" && quarter != "3" && quarter != "4")
+            {
+                MessageBox.Show("Please enter a valid quarter (1, 2, 3, or 4).");
+                return;
+            }
+
+            DisplayQuarterDates(year, quarter);
+        }
+
     }
 }
