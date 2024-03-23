@@ -3,6 +3,7 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using System.Data.SqlTypes;
 
 namespace SomerenUI
 {
@@ -25,6 +26,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             pnlStock.Hide();
             pnlOrders.Hide();
+            pnlRevenue.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -39,6 +41,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             pnlStock.Hide();
             pnlOrders.Hide();
+            pnlRevenue.Hide();
             // show students
             pnlStudents.Show();
 
@@ -62,6 +65,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             pnlOrders.Hide();
             pnlStock.Hide();
+            pnlRevenue.Hide();
             //show rooms panel
             pnlRooms.Show();
             try
@@ -164,6 +168,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             pnlStock.Hide();
             pnlOrders.Hide();
+            pnlRevenue.Hide();
             // show teachers
             pnlLecturers.Show();
             try
@@ -209,6 +214,7 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlRooms.Hide();
             pnlStudents.Hide();
+            pnlRevenue.Hide();
             pnlStock.Hide();
             pnlOrders.Hide();
             // Show activities panel
@@ -253,6 +259,60 @@ namespace SomerenUI
             return activiteiten;
         }
 
+        private void submitDate()
+        {
+            DateTime startDate = dtpStartDate.Value.Date;
+            DateTime endDate = dtpEndDate.Value.Date;
+            if (startDate < endDate)
+            {
+                lblDateSelect.Text = ($"Selected period: {startDate.ToString("dd/MM/yyyy")} - {endDate.ToString("dd/MM/yyyy")}");
+
+                try
+                {
+                    List<Revenue> revenues = GetSales(startDate, endDate);
+                    displayRev(revenues);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Something went wrong while loading the revenue: " + e.Message);
+                }
+
+            }
+            else
+            {
+        MessageBox.Show("Invalid Period: Please select dates within the valid range.");
+            }
+
+        }
+        private List<Revenue> GetSales(DateTime startDate, DateTime endDate)
+        {
+            RevenueService revenueService = new();
+            if (startDate < SqlDateTime.MinValue.Value)
+            {
+                startDate = SqlDateTime.MinValue.Value;
+            }
+            if (endDate > SqlDateTime.MaxValue.Value)
+            {
+                endDate = SqlDateTime.MaxValue.Value;
+            }
+            List<Revenue> revenues = revenueService.GetRangeDate(startDate, endDate);
+            return revenues;
+        }
+
+        private void displayRev(List<Revenue> Sales)
+        {
+            lvRevenue.Items.Clear();
+
+            foreach (Revenue rev in Sales)
+            {
+                ListViewItem item = new ListViewItem(rev.numberOfCustomer.ToString());
+                item.SubItems.Add(rev.sales.ToString());
+                item.SubItems.Add(rev.turnOver.ToString("0.00"));
+                lvRevenue.Items.Add(item);
+            }
+
+            lvRevenue.Show();
+        }
         /* Show stock */
 
         private void ShowStockPanel()
@@ -264,7 +324,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             pnlLecturers.Hide();
             pnlOrders.Hide();
-            pnlOrders.Hide();
+            pnlRevenue.Hide();
             // show stock
             pnlStock.Show();
             try
@@ -302,8 +362,21 @@ namespace SomerenUI
                 listViewStock.Items.Add(li);
             }
         }
+        private void DisplayRevenue()
+        {
+            // Hide all other panels
+            pnlDashboard.Hide();
+            pnlLecturers.Hide();
+            pnlRooms.Hide();
+            pnlStudents.Hide();
+            pnlActivities.Hide();
+            pnlOrders.Hide();
+            pnlStock.Hide();
 
+            // Show Revenue panel
+            pnlRevenue.Show();
 
+        }
 
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -315,6 +388,15 @@ namespace SomerenUI
             ShowActivitiesPanel();
         }
 
+        private void revenueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayRevenue();
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            submitDate();
+        }
         private void stockToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowStockPanel();
@@ -354,6 +436,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             pnlLecturers.Hide();
             pnlStock.Hide();
+            pnlRevenue.Hide();
             // show Orders
             pnlOrders.Show();
             try
