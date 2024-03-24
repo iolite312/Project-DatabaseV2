@@ -24,10 +24,10 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
             pnlStock.Hide();
             pnlOrders.Hide();
             pnlRevenue.Hide();
-
             // show dashboard
             pnlDashboard.Show();
         }
@@ -39,6 +39,7 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
             pnlStock.Hide();
             pnlOrders.Hide();
             pnlRevenue.Hide();
@@ -63,6 +64,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlLecturers.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
             pnlOrders.Hide();
             pnlStock.Hide();
             pnlRevenue.Hide();
@@ -156,9 +158,7 @@ namespace SomerenUI
         }
 
 
-
         /* Show Teachers*/
-
         private void ShowTeachersPanel()
         {
             // hide all other panels
@@ -166,6 +166,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlRooms.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
             pnlStock.Hide();
             pnlOrders.Hide();
             pnlRevenue.Hide();
@@ -214,6 +215,7 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlRooms.Hide();
             pnlStudents.Hide();
+            pnlVATReport.Hide();
             pnlRevenue.Hide();
             pnlStock.Hide();
             pnlOrders.Hide();
@@ -258,7 +260,48 @@ namespace SomerenUI
             List<Activiteiten> activiteiten = activiteitenService.GetActivities();
             return activiteiten;
         }
+        private void ShowVATReportPanel()
+        {
+            pnlActivities.Hide();
+            pnlDashboard.Hide();
+            pnlLecturers.Hide();
+            pnlRooms.Hide();
+            pnlStudents.Hide();
+            pnlVATReport.Show();
 
+            // Validate year
+            int year;
+            if (!int.TryParse(textBoxYear.Text, out year) || !DrankVAT.ValidationYear.IsValidYear(year))
+            {
+                // Handle invalid year input
+                return;
+            }
+
+            // Proceed with other validations
+            string quarter = textBoxQuarter.Text.ToUpper();
+            if (string.IsNullOrEmpty(quarter) || !(quarter == "1" || quarter == "2" || quarter == "3" || quarter == "Q4"))
+            {
+                // Handle invalid quarter input
+                return;
+            }
+        }
+        private void DisplayVatReport(int year, string quarter)
+        {
+            DrankVATService drankVATService = new DrankVATService();
+            decimal totalVat, totalVATHigh, totalVATLow;
+            drankVATService.CalculateVATForQuarter(year, quarter, out totalVATLow, out totalVATHigh, out totalVat);
+            DateTime startQuarter, endQuarter;
+            drankVATService.CalculateQuarterDates(year, quarter, out startQuarter, out endQuarter);
+            ListViewItem item = new ListViewItem(year.ToString());
+            item.SubItems.Add(quarter);
+            item.SubItems.Add(startQuarter.ToString());
+            item.SubItems.Add(endQuarter.ToString());
+            item.SubItems.Add(totalVATLow.ToString("C"));
+            item.SubItems.Add(totalVATHigh.ToString("C"));
+            item.SubItems.Add(totalVat.ToString("C"));
+            listViewVATReport.Items.Clear(); // Clear all items first
+            listViewVATReport.Items.Add(item);
+         }
         private void submitDate()
         {
             DateTime startDate = dtpStartDate.Value.Date;
@@ -322,6 +365,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlRooms.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
             pnlLecturers.Hide();
             pnlOrders.Hide();
             pnlRevenue.Hide();
@@ -370,6 +414,7 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlStudents.Hide();
             pnlActivities.Hide();
+            pnlVATReport.Hide();
             pnlOrders.Hide();
             pnlStock.Hide();
 
@@ -388,6 +433,50 @@ namespace SomerenUI
             ShowActivitiesPanel();
         }
 
+        private void vATReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowVATReportPanel();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Validate input
+            if (string.IsNullOrWhiteSpace(textBoxYear.Text) || string.IsNullOrWhiteSpace(textBoxQuarter.Text))
+            {
+                MessageBox.Show("Please enter both year and quarter.");
+                return;
+            }
+
+            int year;
+            if (!int.TryParse(textBoxYear.Text, out year))
+            {
+                MessageBox.Show("Please enter a valid year.");
+                return;
+            }
+
+            if (!ValidationYear.IsValidYear(year))
+            {
+                MessageBox.Show("There is only data available for 2024");
+                return;
+            }
+
+            string quarter = textBoxQuarter.Text.ToUpper();
+            if (quarter != "1" && quarter != "2" && quarter != "3" && quarter != "4")
+            {
+                MessageBox.Show("Please enter a valid quarter (1, 2, 3, or 4).");
+                return;
+            }
+
+            try
+            {
+                DisplayVatReport(year, quarter);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void revenueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisplayRevenue();
@@ -437,6 +526,7 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlStock.Hide();
             pnlRevenue.Hide();
+            pnlVATReport.Hide();
             // show Orders
             pnlOrders.Show();
             try
@@ -523,7 +613,7 @@ namespace SomerenUI
                 Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
                 int totalDrinks = CheckOrderCount();
                 decimal totalPrice = totalDrinks * fullDrink.price;
-                OrderTotalInputlbl.Text = $"€{totalPrice}";
+                OrderTotalInputlbl.Text = $"Â€{totalPrice}";
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

@@ -87,6 +87,22 @@ namespace SomerenUI
             ActiviteitEindTijd = new System.Windows.Forms.ColumnHeader();
             ActiviteitDatum = new System.Windows.Forms.ColumnHeader();
             labelActivities = new System.Windows.Forms.Label();
+            pnlVATReport = new System.Windows.Forms.Panel();
+            button1 = new System.Windows.Forms.Button();
+            textBoxQuarter = new System.Windows.Forms.TextBox();
+            textBoxYear = new System.Windows.Forms.TextBox();
+            VATReportQuarterlbl = new System.Windows.Forms.Label();
+            VATReportYearlbl = new System.Windows.Forms.Label();
+            pictureBox8 = new System.Windows.Forms.PictureBox();
+            listViewVATReport = new System.Windows.Forms.ListView();
+            columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            VATReportlbl = new System.Windows.Forms.Label();
             pnlRevenue = new System.Windows.Forms.Panel();
             lblDateSelect = new System.Windows.Forms.Label();
             btnSubmit = new System.Windows.Forms.Button();
@@ -135,6 +151,8 @@ namespace SomerenUI
             pnlLecturers.SuspendLayout();
             pnlActivities.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            pnlVATReport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             pnlRevenue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             pnlOrders.SuspendLayout();
@@ -229,6 +247,7 @@ namespace SomerenUI
             vATReportToolStripMenuItem.Name = "vATReportToolStripMenuItem";
             vATReportToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
             vATReportToolStripMenuItem.Text = "VAT Report";
+            vATReportToolStripMenuItem.Click += vATReportToolStripMenuItem_Click;
             // 
             // pnlDashboard
             // 
@@ -503,7 +522,7 @@ namespace SomerenUI
             listViewActivities.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ActivityId, ActiviteitSoortActiviteit, ActiviteitBeginTijd, ActiviteitEindTijd, ActiviteitDatum });
             listViewActivities.FullRowSelect = true;
             listViewActivities.GridLines = true;
-            listViewActivities.Location = new System.Drawing.Point(18, 56);
+            listViewActivities.Location = new System.Drawing.Point(21, 57);
             listViewActivities.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listViewActivities.Name = "listViewActivities";
             listViewActivities.Size = new System.Drawing.Size(875, 408);
@@ -545,6 +564,133 @@ namespace SomerenUI
             labelActivities.TabIndex = 0;
             labelActivities.Text = "Activities";
             // 
+            // pnlVATReport
+            // 
+            pnlVATReport.Controls.Add(button1);
+            pnlVATReport.Controls.Add(textBoxQuarter);
+            pnlVATReport.Controls.Add(textBoxYear);
+            pnlVATReport.Controls.Add(VATReportQuarterlbl);
+            pnlVATReport.Controls.Add(VATReportYearlbl);
+            pnlVATReport.Controls.Add(pictureBox8);
+            pnlVATReport.Controls.Add(listViewVATReport);
+            pnlVATReport.Controls.Add(VATReportlbl);
+            pnlVATReport.Location = new System.Drawing.Point(13, 31);
+            pnlVATReport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pnlVATReport.Name = "pnlVATReport";
+            pnlVATReport.Size = new System.Drawing.Size(1072, 651);
+            pnlVATReport.TabIndex = 6;
+            // 
+            // button1
+            // 
+            button1.Location = new System.Drawing.Point(153, 167);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(94, 29);
+            button1.TabIndex = 9;
+            button1.Text = "Calculate";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // textBoxQuarter
+            // 
+            textBoxQuarter.Location = new System.Drawing.Point(189, 115);
+            textBoxQuarter.Name = "textBoxQuarter";
+            textBoxQuarter.Size = new System.Drawing.Size(27, 27);
+            textBoxQuarter.TabIndex = 8;
+            // 
+            // textBoxYear
+            // 
+            textBoxYear.Location = new System.Drawing.Point(189, 75);
+            textBoxYear.Name = "textBoxYear";
+            textBoxYear.Size = new System.Drawing.Size(58, 27);
+            textBoxYear.TabIndex = 7;
+            // 
+            // VATReportQuarterlbl
+            // 
+            VATReportQuarterlbl.AutoSize = true;
+            VATReportQuarterlbl.Location = new System.Drawing.Point(20, 118);
+            VATReportQuarterlbl.Name = "VATReportQuarterlbl";
+            VATReportQuarterlbl.Size = new System.Drawing.Size(121, 20);
+            VATReportQuarterlbl.TabIndex = 6;
+            VATReportQuarterlbl.Text = "Quarter number :";
+            // 
+            // VATReportYearlbl
+            // 
+            VATReportYearlbl.AutoSize = true;
+            VATReportYearlbl.Location = new System.Drawing.Point(20, 75);
+            VATReportYearlbl.Name = "VATReportYearlbl";
+            VATReportYearlbl.Size = new System.Drawing.Size(44, 20);
+            VATReportYearlbl.TabIndex = 5;
+            VATReportYearlbl.Text = "Year :";
+            // 
+            // pictureBox8
+            // 
+            pictureBox8.Image = (System.Drawing.Image)resources.GetObject("pictureBox8.Image");
+            pictureBox8.Location = new System.Drawing.Point(920, 9);
+            pictureBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new System.Drawing.Size(149, 164);
+            pictureBox8.TabIndex = 4;
+            pictureBox8.TabStop = false;
+            // 
+            // listViewVATReport
+            // 
+            listViewVATReport.AllowDrop = true;
+            listViewVATReport.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
+            listViewVATReport.FullRowSelect = true;
+            listViewVATReport.GridLines = true;
+            listViewVATReport.Location = new System.Drawing.Point(20, 239);
+            listViewVATReport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listViewVATReport.Name = "listViewVATReport";
+            listViewVATReport.Size = new System.Drawing.Size(916, 358);
+            listViewVATReport.TabIndex = 1;
+            listViewVATReport.UseCompatibleStateImageBehavior = false;
+            listViewVATReport.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Year";
+            columnHeader1.Width = 100;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Quarter";
+            columnHeader2.Width = 120;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "BeginQuarter";
+            columnHeader3.Width = 120;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "EndQuarter";
+            columnHeader4.Width = 120;
+            // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "VAT Low (6%)";
+            columnHeader5.Width = 150;
+            // 
+            // columnHeader6
+            // 
+            columnHeader6.Tag = "";
+            columnHeader6.Text = "VAT High (21%)";
+            columnHeader6.Width = 150;
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Total VAT";
+            columnHeader7.Width = 150;
+            // 
+            // VATReportlbl
+            // 
+            VATReportlbl.AutoSize = true;
+            VATReportlbl.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            VATReportlbl.Location = new System.Drawing.Point(15, 9);
+            VATReportlbl.Name = "VATReportlbl";
+            VATReportlbl.Size = new System.Drawing.Size(165, 41);
+            VATReportlbl.TabIndex = 0;
+            VATReportlbl.Text = "VAT Report";
             // pnlRevenue
             // 
             pnlRevenue.Controls.Add(lblDateSelect);
@@ -907,6 +1053,8 @@ namespace SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1099, 696);
+            Controls.Add(pnlVATReport);
             ClientSize = new System.Drawing.Size(1120, 703);
             Controls.Add(pnlOrders);
             Controls.Add(pnlStock);
@@ -937,6 +1085,9 @@ namespace SomerenUI
             pnlActivities.ResumeLayout(false);
             pnlActivities.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            pnlVATReport.ResumeLayout(false);
+            pnlVATReport.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             pnlRevenue.ResumeLayout(false);
             pnlRevenue.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
@@ -1008,6 +1159,22 @@ namespace SomerenUI
         private System.Windows.Forms.ToolStripMenuItem ordersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem revenueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vATReportToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlVATReport;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.ListView listViewVATReport;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Label VATReportlbl;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.TextBox textBoxQuarter;
+        private System.Windows.Forms.TextBox textBoxYear;
+        private System.Windows.Forms.Label VATReportQuarterlbl;
+        private System.Windows.Forms.Label VATReportYearlbl;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel pnlRevenue;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label lblRevenue;
