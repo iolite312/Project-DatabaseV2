@@ -13,7 +13,10 @@ namespace SomerenDAL
     {
         public List<DrankVAT> GetAllDranken()
         {
-            string query = "SELECT drankId, soortDrank, isAlcoholic, prijs, stock FROM [Drank] ";
+            string query = "SELECT d.[drankId], d.[soortDrank], d.[isAlcoholic], d.[prijs], d.[stock], b.[datum], b,[aantal_gehaald] " +
+                "FROM [dbo].[Drank] as d join [Besteld] AS b ON d.drankId = b.drankId " +
+                "WHERE CONVERT (date, b.datum) BETWEEN " +
+                "'2024-02-20 AND '2024-06-20'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDranken(ExecuteSelectQuery(query, sqlParameters), GetAllFromBesteld());
         }
@@ -109,13 +112,15 @@ namespace SomerenDAL
             }
 
             // Calculate VAT for each drink based on the provided ordered data
-            foreach (var drank in dranken)
+            foreach (DrankVAT drank in dranken)
             {
                 drank.CalculateVAT(orderedData);
             }
 
             return dranken;
         }
+
+
 
         private List<DrankVAT> ReadFromBesteld(DataTable dataTable)
         {
