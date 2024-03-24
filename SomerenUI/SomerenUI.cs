@@ -280,7 +280,7 @@ namespace SomerenUI
             }
             else
             {
-        MessageBox.Show("Invalid Period: Please select dates within the valid range.");
+                MessageBox.Show("Invalid Period: Please select dates within the valid range.");
             }
 
         }
@@ -488,7 +488,8 @@ namespace SomerenUI
                 Order order = new Order(fullDrink.Id, currentStudent.Number, DateTime.Now, totalDrinks);
                 orderService.InsertOrder(order, fullDrink);
                 ClearOrderScreen();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -511,6 +512,22 @@ namespace SomerenUI
                 throw new Exception("Select a higher count than 0");
             }
             return (int)comboCount.SelectedItem;
+        }
+
+        private void comboCount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                DrinksService drinksService = new DrinksService();
+                Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
+                int totalDrinks = CheckOrderCount();
+                decimal totalPrice = totalDrinks * fullDrink.price;
+                OrderTotalInputlbl.Text = $"€{totalPrice}";
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
