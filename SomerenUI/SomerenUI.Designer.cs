@@ -93,7 +93,7 @@ namespace SomerenUI
             textBoxYear = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            pictureBox5 = new System.Windows.Forms.PictureBox();
+            pictureBox8 = new System.Windows.Forms.PictureBox();
             listViewVATReport = new System.Windows.Forms.ListView();
             columnHeader1 = new System.Windows.Forms.ColumnHeader();
             columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -114,7 +114,7 @@ namespace SomerenUI
             pnlActivities.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             pnlVATReport.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -524,7 +524,7 @@ namespace SomerenUI
             pnlVATReport.Controls.Add(textBoxYear);
             pnlVATReport.Controls.Add(label5);
             pnlVATReport.Controls.Add(label4);
-            pnlVATReport.Controls.Add(pictureBox5);
+            pnlVATReport.Controls.Add(pictureBox8);
             pnlVATReport.Controls.Add(listViewVATReport);
             pnlVATReport.Controls.Add(label3);
             pnlVATReport.Location = new System.Drawing.Point(13, 31);
@@ -575,15 +575,15 @@ namespace SomerenUI
             label4.TabIndex = 5;
             label4.Text = "Year :";
             // 
-            // pictureBox5
+            // pictureBox8
             // 
-            pictureBox5.Image = (System.Drawing.Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new System.Drawing.Point(920, 9);
-            pictureBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new System.Drawing.Size(149, 164);
-            pictureBox5.TabIndex = 4;
-            pictureBox5.TabStop = false;
+            pictureBox8.Image = (System.Drawing.Image)resources.GetObject("pictureBox8.Image");
+            pictureBox8.Location = new System.Drawing.Point(920, 9);
+            pictureBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new System.Drawing.Size(149, 164);
+            pictureBox8.TabIndex = 4;
+            pictureBox8.TabStop = false;
             // 
             // listViewVATReport
             // 
@@ -679,7 +679,7 @@ namespace SomerenUI
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             pnlVATReport.ResumeLayout(false);
             pnlVATReport.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -743,7 +743,7 @@ namespace SomerenUI
         private System.Windows.Forms.ToolStripMenuItem revenueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vATReportToolStripMenuItem;
         private System.Windows.Forms.Panel pnlVATReport;
-        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.ListView listViewVATReport;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;

@@ -276,9 +276,9 @@ namespace SomerenUI
         private void DisplayVatReport(int year, string quarter)
         {
             DrankVATService drankVATService = new DrankVATService();
-            decimal totalVat, totalVATHigh, totalVATLow;  
+            decimal totalVat, totalVATHigh, totalVATLow;
             drankVATService.CalculateVATForQuarter(year, quarter, out totalVATLow, out totalVATHigh, out totalVat);
-            DateTime startQuarter, endQuarter; 
+            DateTime startQuarter, endQuarter;
             drankVATService.CalculateQuarterDates(year, quarter, out startQuarter, out endQuarter);
             ListViewItem item = new ListViewItem(year.ToString());
             item.SubItems.Add(quarter);
