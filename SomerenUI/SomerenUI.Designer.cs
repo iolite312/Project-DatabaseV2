@@ -123,6 +123,8 @@ namespace SomerenUI
             StockStock = new System.Windows.Forms.ColumnHeader();
             StockStatus = new System.Windows.Forms.ColumnHeader();
             lblStock = new System.Windows.Forms.Label();
+            OrderTotalPricelbl = new System.Windows.Forms.Label();
+            OrderTotalInputlbl = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -665,6 +667,8 @@ namespace SomerenUI
             // 
             // pnlOrders
             // 
+            pnlOrders.Controls.Add(OrderTotalInputlbl);
+            pnlOrders.Controls.Add(OrderTotalPricelbl);
             pnlOrders.Controls.Add(orderPlacebtn);
             pnlOrders.Controls.Add(comboCount);
             pnlOrders.Controls.Add(comboDrinks);
@@ -699,6 +703,7 @@ namespace SomerenUI
             comboCount.Name = "comboCount";
             comboCount.Size = new System.Drawing.Size(122, 28);
             comboCount.TabIndex = 10;
+            comboCount.SelectedIndexChanged += comboCount_SelectedIndexChanged;
             // 
             // comboDrinks
             // 
@@ -880,6 +885,24 @@ namespace SomerenUI
             lblStock.TabIndex = 0;
             lblStock.Text = "Stock";
             // 
+            // OrderTotalPricelbl
+            // 
+            OrderTotalPricelbl.AutoSize = true;
+            OrderTotalPricelbl.Location = new System.Drawing.Point(446, 130);
+            OrderTotalPricelbl.Name = "OrderTotalPricelbl";
+            OrderTotalPricelbl.Size = new System.Drawing.Size(53, 20);
+            OrderTotalPricelbl.TabIndex = 12;
+            OrderTotalPricelbl.Text = "Totaal:";
+            // 
+            // OrderTotalInputlbl
+            // 
+            OrderTotalInputlbl.AutoSize = true;
+            OrderTotalInputlbl.Location = new System.Drawing.Point(500, 130);
+            OrderTotalInputlbl.Name = "OrderTotalInputlbl";
+            OrderTotalInputlbl.Size = new System.Drawing.Size(36, 20);
+            OrderTotalInputlbl.TabIndex = 13;
+            OrderTotalInputlbl.Text = "0.00";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1021,5 +1044,7 @@ namespace SomerenUI
         private System.Windows.Forms.Label orderDrinklbl;
         private System.Windows.Forms.Label orderStudentlbl;
         private System.Windows.Forms.Button orderPlacebtn;
+        private System.Windows.Forms.Label OrderTotalInputlbl;
+        private System.Windows.Forms.Label OrderTotalPricelbl;
     }
 }
