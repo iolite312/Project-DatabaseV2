@@ -3,8 +3,7 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
-using SomerenDAL;
-using static SomerenModel.DrankVAT;
+using System.Data.SqlTypes;
 
 namespace SomerenUI
 {
@@ -13,7 +12,10 @@ namespace SomerenUI
         public SomerenUI()
         {
             InitializeComponent();
+            ShowDashboardPanel();
         }
+
+
 
         private void ShowDashboardPanel()
         {
@@ -23,7 +25,9 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlActivities.Hide();
             pnlVATReport.Hide();
-
+            pnlStock.Hide();
+            pnlOrders.Hide();
+            pnlRevenue.Hide();
             // show dashboard
             pnlDashboard.Show();
         }
@@ -36,7 +40,9 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlActivities.Hide();
             pnlVATReport.Hide();
-
+            pnlStock.Hide();
+            pnlOrders.Hide();
+            pnlRevenue.Hide();
             // show students
             pnlStudents.Show();
 
@@ -59,8 +65,9 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlActivities.Hide();
             pnlVATReport.Hide();
-
-
+            pnlOrders.Hide();
+            pnlStock.Hide();
+            pnlRevenue.Hide();
             //show rooms panel
             pnlRooms.Show();
             try
@@ -90,7 +97,7 @@ namespace SomerenUI
                 ListViewItem li = new ListViewItem(room.Id.ToString());
                 li.SubItems.Add(room.RoomNumber);
                 li.SubItems.Add(room.RoomSize.ToString());
-                li.SubItems.Add(room.Type);
+                li.SubItems.Add(room.Type.ToString());
 
                 li.Tag = room;   // link student object to listview item
                 listViewRooms.Items.Add(li);
@@ -160,6 +167,9 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlActivities.Hide();
             pnlVATReport.Hide();
+            pnlStock.Hide();
+            pnlOrders.Hide();
+            pnlRevenue.Hide();
             // show teachers
             pnlLecturers.Show();
             try
@@ -206,6 +216,9 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlStudents.Hide();
             pnlVATReport.Hide();
+            pnlRevenue.Hide();
+            pnlStock.Hide();
+            pnlOrders.Hide();
             // Show activities panel
             pnlActivities.Show();
 
@@ -247,7 +260,6 @@ namespace SomerenUI
             List<Activiteiten> activiteiten = activiteitenService.GetActivities();
             return activiteiten;
         }
-
         private void ShowVATReportPanel()
         {
             pnlActivities.Hide();
@@ -289,6 +301,126 @@ namespace SomerenUI
             item.SubItems.Add(totalVat.ToString("C"));
             listViewVATReport.Items.Clear(); // Clear all items first
             listViewVATReport.Items.Add(item);
+         }
+        private void submitDate()
+        {
+            DateTime startDate = dtpStartDate.Value.Date;
+            DateTime endDate = dtpEndDate.Value.Date;
+            if (startDate < endDate)
+            {
+                lblDateSelect.Text = ($"Selected period: {startDate.ToString("dd/MM/yyyy")} - {endDate.ToString("dd/MM/yyyy")}");
+
+                try
+                {
+                    List<Revenue> revenues = GetSales(startDate, endDate);
+                    displayRev(revenues);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Something went wrong while loading the revenue: " + e.Message);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Invalid Period: Please select dates within the valid range.");
+            }
+
+        }
+        private List<Revenue> GetSales(DateTime startDate, DateTime endDate)
+        {
+            RevenueService revenueService = new();
+            if (startDate < SqlDateTime.MinValue.Value)
+            {
+                startDate = SqlDateTime.MinValue.Value;
+            }
+            if (endDate > SqlDateTime.MaxValue.Value)
+            {
+                endDate = SqlDateTime.MaxValue.Value;
+            }
+            List<Revenue> revenues = revenueService.GetRangeDate(startDate, endDate);
+            return revenues;
+        }
+
+        private void displayRev(List<Revenue> Sales)
+        {
+            lvRevenue.Items.Clear();
+
+            foreach (Revenue rev in Sales)
+            {
+                ListViewItem item = new ListViewItem(rev.numberOfCustomer.ToString());
+                item.SubItems.Add(rev.sales.ToString());
+                item.SubItems.Add(rev.turnOver.ToString("0.00"));
+                lvRevenue.Items.Add(item);
+            }
+
+            lvRevenue.Show();
+        }
+        /* Show stock */
+
+        private void ShowStockPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            pnlRooms.Hide();
+            pnlActivities.Hide();
+            pnlVATReport.Hide();
+            pnlLecturers.Hide();
+            pnlOrders.Hide();
+            pnlRevenue.Hide();
+            // show stock
+            pnlStock.Show();
+            try
+            {
+                // get and display all teachers
+                List<Drinks> drinks = GetDrinks();
+                DisplayDrinks(drinks);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the stock: " + e.Message);
+            }
+        }
+
+        private List<Drinks> GetDrinks()
+        {
+            DrinksService drinksService = new DrinksService();
+            List<Drinks> drinks = drinksService.GetDrinks();
+            return drinks;
+        }
+
+        private void DisplayDrinks(List<Drinks> drinks)
+        {
+            // clear the listview before filling it
+            listViewStock.Items.Clear();
+            foreach (Drinks drink in drinks)
+            {
+                ListViewItem li = new ListViewItem(drink.Id.ToString());
+                li.SubItems.Add(drink.name.ToString());
+                li.SubItems.Add(drink.price.ToString());
+                li.SubItems.Add(drink.Type);
+                li.SubItems.Add(drink.stock.ToString());
+                li.SubItems.Add(drink.stockStatus);
+                li.Tag = drink;   // link drink object to listview item
+                listViewStock.Items.Add(li);
+            }
+        }
+        private void DisplayRevenue()
+        {
+            // Hide all other panels
+            pnlDashboard.Hide();
+            pnlLecturers.Hide();
+            pnlRooms.Hide();
+            pnlStudents.Hide();
+            pnlActivities.Hide();
+            pnlVATReport.Hide();
+            pnlOrders.Hide();
+            pnlStock.Hide();
+
+            // Show Revenue panel
+            pnlRevenue.Show();
+
         }
 
         private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -345,6 +477,147 @@ namespace SomerenUI
                 MessageBox.Show(ex.Message);
             }
         }
+        private void revenueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayRevenue();
+        }
 
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            submitDate();
+        }
+        private void stockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowStockPanel();
+        }
+
+        private void DrinksAddBtn_Click(object sender, EventArgs e)
+        {
+            AddDrink addDrinksForm = new AddDrink();
+            addDrinksForm.ShowDialog();
+            ShowStockPanel();
+        }
+
+        private void DrinksEditBtn_Click(object sender, EventArgs e)
+        {
+            EditDrink EditDrinkForm = new EditDrink();
+            EditDrinkForm.ShowDialog();
+            ShowStockPanel();
+        }
+
+        private void DrinksDeleteBtn_Click(object sender, EventArgs e)
+        {
+            DeleteDrink deleteDrinkForm = new DeleteDrink();
+            deleteDrinkForm.ShowDialog();
+            ShowStockPanel();
+        }
+
+        private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowOrderPanel();
+        }
+        private void ShowOrderPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            pnlRooms.Hide();
+            pnlActivities.Hide();
+            pnlLecturers.Hide();
+            pnlStock.Hide();
+            pnlRevenue.Hide();
+            pnlVATReport.Hide();
+            // show Orders
+            pnlOrders.Show();
+            try
+            {
+                DisplayOrders();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the Orders: " + e.Message);
+            }
+        }
+        private void DisplayOrders()
+        {
+            List<Student> students = GetStudents();
+            List<Drinks> drinks = GetDrinks();
+            foreach (Student student in students)
+            {
+                comboStudent.Items.Add($"{student.FullName}");
+
+            }
+            foreach (Drinks drink in drinks)
+            {
+                comboDrinks.Items.Add($"{drink.name}");
+            }
+        }
+
+        private void comboDrinks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DrinksService drinksService = new DrinksService();
+            int currentDrink = comboDrinks.SelectedIndex;
+            Drinks fullDrink = drinksService.GetDrinkById(currentDrink + 1);
+            for (int i = 0; fullDrink.stock >= i; i++)
+            {
+                comboCount.Items.Add(i);
+            }
+
+        }
+
+        private void orderPlacebtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OrderService orderService = new OrderService();
+                DrinksService drinksService = new DrinksService();
+                List<Student> students = GetStudents();
+                Student currentStudent = students[comboStudent.SelectedIndex];
+                Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
+                int totalDrinks = CheckOrderCount();
+                Order order = new Order(fullDrink.Id, currentStudent.Number, DateTime.Now, totalDrinks);
+                orderService.InsertOrder(order, fullDrink);
+                ClearOrderScreen();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void ClearOrderScreen()
+        {
+            MessageBox.Show("Order was a succes!");
+            comboCount.Items.Clear();
+            comboStudent.Items.Clear();
+            comboDrinks.Items.Clear();
+            comboCount.ResetText();
+            comboStudent.ResetText();
+            comboDrinks.ResetText();
+            DisplayOrders();
+        }
+        private int CheckOrderCount()
+        {
+            if ((int)comboCount.SelectedItem == 0)
+            {
+                throw new Exception("Select a higher count than 0");
+            }
+            return (int)comboCount.SelectedItem;
+        }
+
+        private void comboCount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                DrinksService drinksService = new DrinksService();
+                Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
+                int totalDrinks = CheckOrderCount();
+                decimal totalPrice = totalDrinks * fullDrink.price;
+                OrderTotalInputlbl.Text = $"{totalPrice}";
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
