@@ -261,39 +261,38 @@ namespace SomerenUI
             int year;
             if (!int.TryParse(textBoxYear.Text, out year) || !DrankVAT.ValidationYear.IsValidYear(year))
             {
-
+                // Handle invalid year input
+                return;
             }
 
             // Proceed with other validations
             string quarter = textBoxQuarter.Text.ToUpper();
             if (string.IsNullOrEmpty(quarter) || !(quarter == "1" || quarter == "2" || quarter == "3" || quarter == "Q4"))
             {
-
+                // Handle invalid quarter input
+                return;
             }
 
             try
             {
-                // Retrieve drinks for the specified quarter using DrankDao
+                // Retrieve drinks for the specified quarter using DrankVATDao
                 DrankVATDao drankDao = new DrankVATDao();
                 List<DrankVAT> drinks = drankDao.GetDrankenForQuarter(year, quarter);
-
-                // Create an instance of DrankService
-                SomerenService.DrankVATService drankService = new SomerenService.DrankVATService();
-
-                // Calculate quarter dates using DrankService method
-                Tuple<DateTime, DateTime> quarterDates = drankService.CalculateQuarterDates(year, quarter);
+                List<DrankVAT> orderedData = drankDao.GetAllFromBesteld();
 
                 // Display quarter dates in ListView
                 DisplayQuarterDates(year, quarter);
 
                 // Display VAT report
-                DisplayVATReport(drinks);
+                DisplayVATReport(drinks, orderedData);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
+
+
 
 
 
@@ -309,13 +308,16 @@ namespace SomerenUI
             DrankVATDao drankDao = new DrankVATDao();
             List<DrankVAT> drinks = drankDao.GetDrankenForQuarter(year, quarter);
 
+            // Retrieve ordered data for the specified quarter
+            List<DrankVAT> orderedData = drankDao.GetAllFromBesteld();
+
             // Calculate total VAT for all drinks in the quarter
             decimal totalVATLow = 0;
             decimal totalVATHigh = 0;
             foreach (DrankVAT drink in drinks)
             {
                 // Calculate VAT for the drink using the CalculateVAT method of the Drank class
-                decimal vat = drink.CalculateVAT();
+                decimal vat = drink.CalculateVAT(orderedData);
 
                 // Accumulate VAT amounts based on whether the drink is alcoholic
                 if (drink.IsAlcoholic)
@@ -332,14 +334,14 @@ namespace SomerenUI
             // Add begin and end dates, along with VAT, to the ListView
             ListViewItem item = new ListViewItem(new[]
             {
-    year.ToString(),
-    quarter,
-    quarterDates.Item1.ToShortDateString(),
-    quarterDates.Item2.ToShortDateString(),
-    totalVATLow.ToString("C"), // VAT Low (6%)
-    totalVATHigh.ToString("C"), // VAT High (21%)
-    (totalVATLow + totalVATHigh).ToString("C") // TOTAL VAT
-});
+        year.ToString(),
+        quarter,
+        quarterDates.Item1.ToShortDateString(),
+        quarterDates.Item2.ToShortDateString(),
+        totalVATLow.ToString("C"), // VAT Low (6%)
+        totalVATHigh.ToString("C"), // VAT High (21%)
+        (totalVATLow + totalVATHigh).ToString("C") // TOTAL VAT
+    });
 
             listViewVATReport.Items.Clear(); // Clear all items first
             listViewVATReport.Items.Add(item);
@@ -350,9 +352,7 @@ namespace SomerenUI
 
 
 
-
-
-        private void DisplayVATReport(List<DrankVAT> drinks)
+        private void DisplayVATReport(List<DrankVAT> drinks, List<DrankVAT> orderedData)
         {
             // Variables to accumulate VAT amounts
             decimal totalVATLow = 0;
@@ -364,7 +364,7 @@ namespace SomerenUI
             foreach (DrankVAT drink in drinks)
             {
                 // Get VAT amount directly from the CalculateVAT method of the Drank class
-                decimal vatAmount = drink.CalculateVAT();
+                decimal vatAmount = drink.CalculateVAT(orderedData);
 
                 // Accumulate VAT amounts based on whether the drink is alcoholic
                 if (drink.IsAlcoholic)
@@ -375,11 +375,6 @@ namespace SomerenUI
                 {
                     totalVATLow += vatAmount; // Accumulate VAT for low (6%)
                 }
-
-
-                // Update total VAT amounts
-                totalVATLow += drink.IsAlcoholic ? 0 : vatAmount;
-                totalVATHigh += drink.IsAlcoholic ? vatAmount : 0;
             }
 
             // Add total row to the ListView
@@ -393,6 +388,13 @@ namespace SomerenUI
 
             listViewVATReport.Items.Add(totalItem); // Add total item to the ListView
         }
+
+
+
+
+
+
+
 
 
 

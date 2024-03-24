@@ -11,23 +11,29 @@ namespace SomerenDAL
 {
     public class DrankVATDao : BaseDao
     {
-
         public List<DrankVAT> GetAllDranken()
         {
-            string query = "SELECT drankId, soortDrank, isAlcoholic, prijs, stock FROM [Drank]";
+            string query = "SELECT drankId, soortDrank, isAlcoholic, prijs, stock FROM [Drank] ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDranken(ExecuteSelectQuery(query, sqlParameters));
+            return ReadDranken(ExecuteSelectQuery(query, sqlParameters), GetAllFromBesteld());
+        }
+
+        public List<DrankVAT> GetAllFromBesteld()
+        {
+            string besteldQuery = "SELECT drankId, datum, aantal_gehaald FROM [Besteld]";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadFromBesteld(ExecuteSelectQuery(besteldQuery, sqlParameters));
         }
 
         // Method to retrieve drinks sold in a specified quarter
         public List<DrankVAT> GetDrankenForQuarter(int year, string quarter)
         {
-            // Determine the start and end dates of the quarter
             DateTime startQuarter, endQuarter;
             CalculateQuarterDates(year, quarter, out startQuarter, out endQuarter);
 
-            // Query to retrieve drinks sold within the specified quarter
-            string query = "SELECT drankId, soortDrank, isAlcoholic, prijs, stock FROM [Drank] ";
+            // Query to retrieve drinks sold within the specified quarter from the 'Besteld' table
+            string besteldQuery = "SELECT drankId, datum, aantal_gehaald FROM [Besteld] " +
+                                  "WHERE datum >= @startQuarter AND datum <= @endQuarter";
 
             // Set parameters for the query
             SqlParameter[] sqlParameters = new SqlParameter[]
@@ -37,13 +43,8 @@ namespace SomerenDAL
             };
 
             // Execute the query and return the result
-            return ReadDranken(ExecuteSelectQuery(query, sqlParameters));
+            return ReadFromBesteld(ExecuteSelectQuery(besteldQuery, sqlParameters));
         }
-
-
-
-
-
 
         private void CalculateQuarterDates(int year, string quarter, out DateTime startQuarter, out DateTime endQuarter)
         {
@@ -73,8 +74,6 @@ namespace SomerenDAL
             }
         }
 
-
-
         private int ConvertQuarterToInt(string quarter)
         {
             switch (quarter.ToUpper())
@@ -92,7 +91,7 @@ namespace SomerenDAL
             }
         }
 
-        private List<DrankVAT> ReadDranken(DataTable dataTable)
+        private List<DrankVAT> ReadDranken(DataTable dataTable, List<DrankVAT> orderedData)
         {
             List<DrankVAT> dranken = new List<DrankVAT>();
 
@@ -106,13 +105,36 @@ namespace SomerenDAL
                     IsAlcoholic = ((Int16)dr["isAlcoholic"] != 0) // Convert Int16 to bool
                 };
 
-                // Calculate VAT for the drink based on its price, stock, and alcohol content
-                drank.CalculateVAT();
-
                 dranken.Add(drank);
             }
+
+            // Calculate VAT for each drink based on the provided ordered data
+            foreach (var drank in dranken)
+            {
+                drank.CalculateVAT(orderedData);
+            }
+
             return dranken;
         }
 
+        private List<DrankVAT> ReadFromBesteld(DataTable dataTable)
+        {
+            List<DrankVAT> items = new List<DrankVAT>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                DrankVAT newItem = new DrankVAT()
+                {
+                    drankId = (int)dr["drankId"],
+                    datum = (DateTime)dr["datum"],
+                    aantal_gehaald = (int)dr["aantal_gehaald"]
+                };
+
+                items.Add(newItem);
+            }
+
+            return items;
+        }
     }
+
 }

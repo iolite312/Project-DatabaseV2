@@ -10,14 +10,16 @@ namespace SomerenModel
 
     public class DrankVAT
     {
-        public int id { get; set; }
+        public DateTime datum { get; set; }
+        public int aantal_gehaald { get; set; }
+        public int drankId { get; set; }
         public string SoortDrank { get; set; }
         public bool IsAlcoholic { get; set; }
         public decimal Prijs { get; set; }
         public int Stock { get; set; }
 
 
-        public decimal CalculateVAT()
+        public decimal CalculateVAT(List<DrankVAT> orderedData)
         {
             // Determine VAT rates based on whether the drink is alcoholic or not
             decimal VATRateLow = 0.06m; // 6%
@@ -27,14 +29,24 @@ namespace SomerenModel
             decimal totalVATLow = 0;
             decimal totalVATHigh = 0;
 
-            // Calculate VAT amount for the whole stock
-            if (IsAlcoholic)
+            // Check if the drink is ordered by checking if its drankId is present in the list of ordered drinks
+            if (drankId != null)
             {
-                totalVATHigh = Prijs * Stock * VATRateHigh;
+                // The drink is ordered
+                if (IsAlcoholic)
+                {
+                    totalVATHigh += Prijs * aantal_gehaald * VATRateHigh;
+                }
+                else
+                {
+                    totalVATLow += Prijs * aantal_gehaald * VATRateLow;
+                }
             }
-            else if (!IsAlcoholic) 
+            else
             {
-                totalVATLow = Prijs * Stock * VATRateLow;
+                // Add logic here if the drink is not ordered (e.g., calculate VAT based on default criteria)
+                // totalVATLow = ...; // Set to a default value for VAT
+                // totalVATHigh = ...; // Set to a default value for VAT
             }
 
             // Calculate total VAT amount
@@ -42,6 +54,10 @@ namespace SomerenModel
 
             return totalVAT;
         }
+
+
+
+
 
 
         public static class ValidationYear

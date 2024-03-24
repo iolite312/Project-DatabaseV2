@@ -30,12 +30,15 @@ namespace SomerenService
             // Retrieve drinks sold in the specified quarter
             List<DrankVAT> dranken = drankDAO.GetDrankenForQuarter(year, quarter);
 
+            // Retrieve ordered data for the specified quarter
+            List<DrankVAT> orderedData = drankDAO.GetAllFromBesteld();
+
             // Calculate total VAT for all drinks in the quarter
             decimal totalVAT = 0;
             foreach (DrankVAT drank in dranken)
             {
-                // Assuming Drank class has a method to calculate VAT for each drink
-                totalVAT += drank.CalculateVAT();
+                // Calculate VAT for each drink in the quarter based on ordered data
+                totalVAT += drank.CalculateVAT(orderedData);
             }
 
             return totalVAT;
