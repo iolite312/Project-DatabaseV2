@@ -17,60 +17,78 @@ namespace SomerenService
             drankDAO = new DrankVATDao();
         }
 
-        // Method to retrieve all drinks
-        public List<DrankVAT> GetDranken()
-        {
-            List<DrankVAT> dranks = drankDAO.GetAllDranken();
-            return drankDAO.GetAllDranken();
-        }
-
         // Method to calculate VAT for the drinks in a given quarter
-        public decimal CalculateVATForQuarter(int year, string quarter)
+        public void CalculateVATForQuarter(int year, string quarter, out decimal totalVATLow, out decimal totalVATHigh, out decimal totalVAT)
         {
             // Retrieve drinks sold in the specified quarter
             List<DrankVAT> dranken = drankDAO.GetDrankenForQuarter(year, quarter);
 
-            // Retrieve ordered data for the specified quarter
-            List<DrankVAT> orderedData = drankDAO.GetAllFromBesteld();
-
+            totalVAT = 0;
+            totalVATLow = 0;
+            totalVATHigh = 0;
             // Calculate total VAT for all drinks in the quarter
-            decimal totalVAT = 0;
             foreach (DrankVAT drank in dranken)
             {
+                decimal tempVATHigh, tempVAT, tempVATLow;
                 // Calculate VAT for each drink in the quarter based on ordered data
-                totalVAT += drank.CalculateVAT(orderedData);
+                CalculateVAT(drank, out tempVATLow, out tempVATHigh, out tempVAT);
+                totalVAT += tempVAT;
+                totalVATLow += tempVATLow;
+                totalVATHigh += tempVATHigh;
             }
 
-            return totalVAT;
         }
-
-        public Tuple<DateTime, DateTime> CalculateQuarterDates(int year, string quarter)
+        private void CalculateVAT(DrankVAT drank, out decimal totalVATLow, out decimal totalVATHigh, out decimal totalVAT)
         {
-            DateTime beginQuarter, endQuarter;
+            // Determine VAT rates based on whether the drink is alcoholic or not
+            decimal VATRateLow = 0.06m; // 6%
+            decimal VATRateHigh = 0.21m; // 21%
 
-            switch (quarter.ToUpper())
+            // Initialize VAT amounts for low and high rates
+            totalVATLow = 0;
+            totalVATHigh = 0;
+
+            // Check if the drink is ordered by checking if its drankId is present in the list of ordered drinks
+            if (drank.drankId != null)
+            {
+                // The drink is ordered
+                if (drank.IsAlcoholic)
+                {
+                    totalVATHigh += drank.Prijs * drank.aantal_gehaald * VATRateHigh;
+                }
+                else
+                {
+                    totalVATLow += drank.Prijs * drank.aantal_gehaald * VATRateLow;
+                }
+            }
+
+            // Calculate total VAT amount
+            totalVAT = totalVATLow + totalVATHigh;
+        }
+        public void CalculateQuarterDates(int year, string quarter, out DateTime startQuarter, out DateTime endQuarter)
+        {
+
+            switch (quarter)
             {
                 case "1":
-                    beginQuarter = new DateTime(year, 1, 1);
+                    startQuarter = new DateTime(year, 1, 1);
                     endQuarter = new DateTime(year, 3, 31);
                     break;
                 case "2":
-                    beginQuarter = new DateTime(year, 4, 1);
+                    startQuarter = new DateTime(year, 4, 1);
                     endQuarter = new DateTime(year, 6, 30);
                     break;
                 case "3":
-                    beginQuarter = new DateTime(year, 7, 1);
+                    startQuarter = new DateTime(year, 7, 1);
                     endQuarter = new DateTime(year, 9, 30);
                     break;
                 case "4":
-                    beginQuarter = new DateTime(year, 10, 1);
+                    startQuarter = new DateTime(year, 10, 1);
                     endQuarter = new DateTime(year, 12, 31);
                     break;
                 default:
                     throw new ArgumentException("Invalid quarter: " + quarter);
             }
-
-            return Tuple.Create(beginQuarter, endQuarter);
         }
     }
 }
