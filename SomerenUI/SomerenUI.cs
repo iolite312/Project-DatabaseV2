@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
 using SomerenDAL;
-using static SomerenModel.Drank;
+using static SomerenModel.DrankVAT;
 
 namespace SomerenUI
 {
@@ -259,7 +259,7 @@ namespace SomerenUI
 
             // Validate year
             int year;
-            if (!int.TryParse(textBoxYear.Text, out year) || !Drank.ValidationYear.IsValidYear(year))
+            if (!int.TryParse(textBoxYear.Text, out year) || !DrankVAT.ValidationYear.IsValidYear(year))
             {
 
             }
@@ -274,11 +274,11 @@ namespace SomerenUI
             try
             {
                 // Retrieve drinks for the specified quarter using DrankDao
-                DrankDao drankDao = new DrankDao();
-                List<Drank> drinks = drankDao.GetDrankenForQuarter(year, quarter);
+                DrankVATDao drankDao = new DrankVATDao();
+                List<DrankVAT> drinks = drankDao.GetDrankenForQuarter(year, quarter);
 
                 // Create an instance of DrankService
-                SomerenService.DrankService drankService = new SomerenService.DrankService();
+                SomerenService.DrankVATService drankService = new SomerenService.DrankVATService();
 
                 // Calculate quarter dates using DrankService method
                 Tuple<DateTime, DateTime> quarterDates = drankService.CalculateQuarterDates(year, quarter);
@@ -300,19 +300,19 @@ namespace SomerenUI
         private void DisplayQuarterDates(int year, string quarter)
         {
             // Create an instance of DrankService
-            SomerenService.DrankService drankService = new SomerenService.DrankService();
+            SomerenService.DrankVATService drankService = new SomerenService.DrankVATService();
 
             // Calculate quarter dates
             var quarterDates = drankService.CalculateQuarterDates(year, quarter);
 
             // Retrieve drinks sold in the specified quarter
-            DrankDao drankDao = new DrankDao();
-            List<Drank> drinks = drankDao.GetDrankenForQuarter(year, quarter);
+            DrankVATDao drankDao = new DrankVATDao();
+            List<DrankVAT> drinks = drankDao.GetDrankenForQuarter(year, quarter);
 
             // Calculate total VAT for all drinks in the quarter
             decimal totalVATLow = 0;
             decimal totalVATHigh = 0;
-            foreach (Drank drink in drinks)
+            foreach (DrankVAT drink in drinks)
             {
                 // Calculate VAT for the drink using the CalculateVAT method of the Drank class
                 decimal vat = drink.CalculateVAT();
@@ -352,7 +352,7 @@ namespace SomerenUI
 
 
 
-        private void DisplayVATReport(List<Drank> drinks)
+        private void DisplayVATReport(List<DrankVAT> drinks)
         {
             // Variables to accumulate VAT amounts
             decimal totalVATLow = 0;
@@ -361,7 +361,7 @@ namespace SomerenUI
             // Clear the ListView before populating
             listViewVATReport.Items.Clear();
 
-            foreach (Drank drink in drinks)
+            foreach (DrankVAT drink in drinks)
             {
                 // Get VAT amount directly from the CalculateVAT method of the Drank class
                 decimal vatAmount = drink.CalculateVAT();

@@ -8,7 +8,7 @@ namespace SomerenModel
 {
     using System;
 
-    public class Drank
+    public class DrankVAT
     {
         public int id { get; set; }
         public string SoortDrank { get; set; }

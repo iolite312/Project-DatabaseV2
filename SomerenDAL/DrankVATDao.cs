@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace SomerenDAL
 {
-    public class DrankDao : BaseDao
+    public class DrankVATDao : BaseDao
     {
 
-        public List<Drank> GetAllDranken()
+        public List<DrankVAT> GetAllDranken()
         {
             string query = "SELECT drankId, soortDrank, isAlcoholic, prijs, stock FROM [Drank]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
@@ -20,7 +20,7 @@ namespace SomerenDAL
         }
 
         // Method to retrieve drinks sold in a specified quarter
-        public List<Drank> GetDrankenForQuarter(int year, string quarter)
+        public List<DrankVAT> GetDrankenForQuarter(int year, string quarter)
         {
             // Determine the start and end dates of the quarter
             DateTime startQuarter, endQuarter;
@@ -92,13 +92,13 @@ namespace SomerenDAL
             }
         }
 
-        private List<Drank> ReadDranken(DataTable dataTable)
+        private List<DrankVAT> ReadDranken(DataTable dataTable)
         {
-            List<Drank> dranken = new List<Drank>();
+            List<DrankVAT> dranken = new List<DrankVAT>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                Drank drank = new Drank()
+                DrankVAT drank = new DrankVAT()
                 {
                     SoortDrank = dr["soortDrank"].ToString(),
                     Prijs = (decimal)dr["prijs"],

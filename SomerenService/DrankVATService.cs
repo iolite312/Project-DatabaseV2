@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace SomerenService
 {
-    public class DrankService
+    public class DrankVATService
     {
-        private DrankDao drankDAO;
+        private DrankVATDao drankDAO;
 
-        public DrankService()
+        public DrankVATService()
         {
-            drankDAO = new DrankDao();
+            drankDAO = new DrankVATDao();
         }
 
         // Method to retrieve all drinks
-        public List<Drank> GetDranken()
+        public List<DrankVAT> GetDranken()
         {
-            List<Drank> dranks = drankDAO.GetAllDranken();
+            List<DrankVAT> dranks = drankDAO.GetAllDranken();
             return drankDAO.GetAllDranken();
         }
 
@@ -28,11 +28,11 @@ namespace SomerenService
         public decimal CalculateVATForQuarter(int year, string quarter)
         {
             // Retrieve drinks sold in the specified quarter
-            List<Drank> dranken = drankDAO.GetDrankenForQuarter(year, quarter);
+            List<DrankVAT> dranken = drankDAO.GetDrankenForQuarter(year, quarter);
 
             // Calculate total VAT for all drinks in the quarter
             decimal totalVAT = 0;
-            foreach (Drank drank in dranken)
+            foreach (DrankVAT drank in dranken)
             {
                 // Assuming Drank class has a method to calculate VAT for each drink
                 totalVAT += drank.CalculateVAT();
