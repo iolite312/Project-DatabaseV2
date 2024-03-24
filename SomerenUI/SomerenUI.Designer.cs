@@ -91,8 +91,8 @@ namespace SomerenUI
             button1 = new System.Windows.Forms.Button();
             textBoxQuarter = new System.Windows.Forms.TextBox();
             textBoxYear = new System.Windows.Forms.TextBox();
-            label5 = new System.Windows.Forms.Label();
-            label4 = new System.Windows.Forms.Label();
+            VATReportQuarterlbl = new System.Windows.Forms.Label();
+            VATReportYearlbl = new System.Windows.Forms.Label();
             pictureBox8 = new System.Windows.Forms.PictureBox();
             listViewVATReport = new System.Windows.Forms.ListView();
             columnHeader1 = new System.Windows.Forms.ColumnHeader();
@@ -102,7 +102,7 @@ namespace SomerenUI
             columnHeader5 = new System.Windows.Forms.ColumnHeader();
             columnHeader6 = new System.Windows.Forms.ColumnHeader();
             columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            label3 = new System.Windows.Forms.Label();
+            VATReportlbl = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -522,11 +522,11 @@ namespace SomerenUI
             pnlVATReport.Controls.Add(button1);
             pnlVATReport.Controls.Add(textBoxQuarter);
             pnlVATReport.Controls.Add(textBoxYear);
-            pnlVATReport.Controls.Add(label5);
-            pnlVATReport.Controls.Add(label4);
+            pnlVATReport.Controls.Add(VATReportQuarterlbl);
+            pnlVATReport.Controls.Add(VATReportYearlbl);
             pnlVATReport.Controls.Add(pictureBox8);
             pnlVATReport.Controls.Add(listViewVATReport);
-            pnlVATReport.Controls.Add(label3);
+            pnlVATReport.Controls.Add(VATReportlbl);
             pnlVATReport.Location = new System.Drawing.Point(13, 31);
             pnlVATReport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pnlVATReport.Name = "pnlVATReport";
@@ -557,23 +557,23 @@ namespace SomerenUI
             textBoxYear.Size = new System.Drawing.Size(58, 27);
             textBoxYear.TabIndex = 7;
             // 
-            // label5
+            // VATReportQuarterlbl
             // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(20, 118);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(121, 20);
-            label5.TabIndex = 6;
-            label5.Text = "Quarter number :";
+            VATReportQuarterlbl.AutoSize = true;
+            VATReportQuarterlbl.Location = new System.Drawing.Point(20, 118);
+            VATReportQuarterlbl.Name = "VATReportQuarterlbl";
+            VATReportQuarterlbl.Size = new System.Drawing.Size(121, 20);
+            VATReportQuarterlbl.TabIndex = 6;
+            VATReportQuarterlbl.Text = "Quarter number :";
             // 
-            // label4
+            // VATReportYearlbl
             // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(20, 75);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(44, 20);
-            label4.TabIndex = 5;
-            label4.Text = "Year :";
+            VATReportYearlbl.AutoSize = true;
+            VATReportYearlbl.Location = new System.Drawing.Point(20, 75);
+            VATReportYearlbl.Name = "VATReportYearlbl";
+            VATReportYearlbl.Size = new System.Drawing.Size(44, 20);
+            VATReportYearlbl.TabIndex = 5;
+            VATReportYearlbl.Text = "Year :";
             // 
             // pictureBox8
             // 
@@ -635,15 +635,15 @@ namespace SomerenUI
             columnHeader7.Text = "Total VAT";
             columnHeader7.Width = 150;
             // 
-            // label3
+            // VATReportlbl
             // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label3.Location = new System.Drawing.Point(15, 9);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(165, 41);
-            label3.TabIndex = 0;
-            label3.Text = "VAT Report";
+            VATReportlbl.AutoSize = true;
+            VATReportlbl.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            VATReportlbl.Location = new System.Drawing.Point(15, 9);
+            VATReportlbl.Name = "VATReportlbl";
+            VATReportlbl.Size = new System.Drawing.Size(165, 41);
+            VATReportlbl.TabIndex = 0;
+            VATReportlbl.Text = "VAT Report";
             // 
             // SomerenUI
             // 
@@ -750,12 +750,12 @@ namespace SomerenUI
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label VATReportlbl;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.TextBox textBoxQuarter;
         private System.Windows.Forms.TextBox textBoxYear;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label VATReportQuarterlbl;
+        private System.Windows.Forms.Label VATReportYearlbl;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button button1;
     }
