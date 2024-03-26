@@ -70,5 +70,10 @@ namespace SomerenUI
         {
             EditingDrink();
         }
+
+        private void EditDrinkNametxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

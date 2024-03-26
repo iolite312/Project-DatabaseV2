@@ -635,5 +635,24 @@ namespace SomerenUI
             manageParticipants.ShowDialog();
             ShowActivitiesPanel();
         }
+
+        private void btnAddLV_Click(object sender, EventArgs e)
+        {
+            AddStudent addStudent = new AddStudent();
+            addStudent.ShowDialog();
+            ShowStudentsPanel();
+        }
+
+        private void btnDeleteLV_Click(object sender, EventArgs e)
+        {
+            DeleteStudent deleteStudent = new DeleteStudent();
+            deleteStudent.ShowDialog();
+            ShowStudentsPanel();
+        }
+
+        private void btnEditLV_Click(object sender, EventArgs e)
+        {
+ 
+        }
     }
 }
