@@ -79,6 +79,8 @@ namespace SomerenUI
             TelephoneNumber = new System.Windows.Forms.ColumnHeader();
             Age = new System.Windows.Forms.ColumnHeader();
             pnlActivities = new System.Windows.Forms.Panel();
+            manageParticipantsbtn = new System.Windows.Forms.Button();
+            manageSupervisorsbtn = new System.Windows.Forms.Button();
             pictureBox4 = new System.Windows.Forms.PictureBox();
             listViewActivities = new System.Windows.Forms.ListView();
             ActivityId = new System.Windows.Forms.ColumnHeader();
@@ -117,6 +119,8 @@ namespace SomerenUI
             lblRevenue = new System.Windows.Forms.Label();
             pictureBox6 = new System.Windows.Forms.PictureBox();
             pnlOrders = new System.Windows.Forms.Panel();
+            OrderTotalInputlbl = new System.Windows.Forms.Label();
+            OrderTotalPricelbl = new System.Windows.Forms.Label();
             orderPlacebtn = new System.Windows.Forms.Button();
             comboCount = new System.Windows.Forms.ComboBox();
             comboDrinks = new System.Windows.Forms.ComboBox();
@@ -139,8 +143,6 @@ namespace SomerenUI
             StockStock = new System.Windows.Forms.ColumnHeader();
             StockStatus = new System.Windows.Forms.ColumnHeader();
             lblStock = new System.Windows.Forms.Label();
-            OrderTotalPricelbl = new System.Windows.Forms.Label();
-            OrderTotalInputlbl = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -497,6 +499,8 @@ namespace SomerenUI
             // 
             // pnlActivities
             // 
+            pnlActivities.Controls.Add(manageParticipantsbtn);
+            pnlActivities.Controls.Add(manageSupervisorsbtn);
             pnlActivities.Controls.Add(pictureBox4);
             pnlActivities.Controls.Add(listViewActivities);
             pnlActivities.Controls.Add(labelActivities);
@@ -505,6 +509,26 @@ namespace SomerenUI
             pnlActivities.Name = "pnlActivities";
             pnlActivities.Size = new System.Drawing.Size(1072, 619);
             pnlActivities.TabIndex = 5;
+            // 
+            // manageParticipantsbtn
+            // 
+            manageParticipantsbtn.Location = new System.Drawing.Point(908, 216);
+            manageParticipantsbtn.Name = "manageParticipantsbtn";
+            manageParticipantsbtn.Size = new System.Drawing.Size(157, 29);
+            manageParticipantsbtn.TabIndex = 6;
+            manageParticipantsbtn.Text = "Manage Participants";
+            manageParticipantsbtn.UseVisualStyleBackColor = true;
+            manageParticipantsbtn.Click += manageParticipantsbtn_Click;
+            // 
+            // manageSupervisorsbtn
+            // 
+            manageSupervisorsbtn.Location = new System.Drawing.Point(908, 180);
+            manageSupervisorsbtn.Name = "manageSupervisorsbtn";
+            manageSupervisorsbtn.Size = new System.Drawing.Size(157, 29);
+            manageSupervisorsbtn.TabIndex = 5;
+            manageSupervisorsbtn.Text = "Manage Supervisors";
+            manageSupervisorsbtn.UseVisualStyleBackColor = true;
+            manageSupervisorsbtn.Click += manageSupervisorsbtn_Click;
             // 
             // pictureBox4
             // 
@@ -691,6 +715,7 @@ namespace SomerenUI
             VATReportlbl.Size = new System.Drawing.Size(165, 41);
             VATReportlbl.TabIndex = 0;
             VATReportlbl.Text = "VAT Report";
+            // 
             // pnlRevenue
             // 
             pnlRevenue.Controls.Add(lblDateSelect);
@@ -829,6 +854,24 @@ namespace SomerenUI
             pnlOrders.Name = "pnlOrders";
             pnlOrders.Size = new System.Drawing.Size(901, 459);
             pnlOrders.TabIndex = 8;
+            // 
+            // OrderTotalInputlbl
+            // 
+            OrderTotalInputlbl.AutoSize = true;
+            OrderTotalInputlbl.Location = new System.Drawing.Point(500, 130);
+            OrderTotalInputlbl.Name = "OrderTotalInputlbl";
+            OrderTotalInputlbl.Size = new System.Drawing.Size(36, 20);
+            OrderTotalInputlbl.TabIndex = 13;
+            OrderTotalInputlbl.Text = "0.00";
+            // 
+            // OrderTotalPricelbl
+            // 
+            OrderTotalPricelbl.AutoSize = true;
+            OrderTotalPricelbl.Location = new System.Drawing.Point(446, 130);
+            OrderTotalPricelbl.Name = "OrderTotalPricelbl";
+            OrderTotalPricelbl.Size = new System.Drawing.Size(53, 20);
+            OrderTotalPricelbl.TabIndex = 12;
+            OrderTotalPricelbl.Text = "Totaal:";
             // 
             // orderPlacebtn
             // 
@@ -1031,35 +1074,16 @@ namespace SomerenUI
             lblStock.TabIndex = 0;
             lblStock.Text = "Stock";
             // 
-            // OrderTotalPricelbl
-            // 
-            OrderTotalPricelbl.AutoSize = true;
-            OrderTotalPricelbl.Location = new System.Drawing.Point(446, 130);
-            OrderTotalPricelbl.Name = "OrderTotalPricelbl";
-            OrderTotalPricelbl.Size = new System.Drawing.Size(53, 20);
-            OrderTotalPricelbl.TabIndex = 12;
-            OrderTotalPricelbl.Text = "Totaal:";
-            // 
-            // OrderTotalInputlbl
-            // 
-            OrderTotalInputlbl.AutoSize = true;
-            OrderTotalInputlbl.Location = new System.Drawing.Point(500, 130);
-            OrderTotalInputlbl.Name = "OrderTotalInputlbl";
-            OrderTotalInputlbl.Size = new System.Drawing.Size(36, 20);
-            OrderTotalInputlbl.TabIndex = 13;
-            OrderTotalInputlbl.Text = "0.00";
-            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1099, 696);
-            Controls.Add(pnlVATReport);
             ClientSize = new System.Drawing.Size(1120, 703);
+            Controls.Add(pnlActivities);
+            Controls.Add(pnlVATReport);
             Controls.Add(pnlOrders);
             Controls.Add(pnlStock);
             Controls.Add(pnlRevenue);
-            Controls.Add(pnlActivities);
             Controls.Add(pnlRooms);
             Controls.Add(pnlLecturers);
             Controls.Add(menuStrip1);
@@ -1213,5 +1237,7 @@ namespace SomerenUI
         private System.Windows.Forms.Button orderPlacebtn;
         private System.Windows.Forms.Label OrderTotalInputlbl;
         private System.Windows.Forms.Label OrderTotalPricelbl;
+        private System.Windows.Forms.Button manageParticipantsbtn;
+        private System.Windows.Forms.Button manageSupervisorsbtn;
     }
 }
