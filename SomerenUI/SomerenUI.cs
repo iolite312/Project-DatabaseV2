@@ -576,8 +576,8 @@ namespace SomerenUI
                 Student currentStudent = students[comboStudent.SelectedIndex];
                 Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
                 int totalDrinks = CheckOrderCount();
-                Order order = new Order(fullDrink.Id, currentStudent.Number, DateTime.Now, totalDrinks);
-                orderService.InsertOrder(order, fullDrink);
+                Order order = new Order(fullDrink, currentStudent, DateTime.Now, totalDrinks);
+                orderService.InsertOrder(order);
                 ClearOrderScreen();
             }
             catch (Exception ex)
