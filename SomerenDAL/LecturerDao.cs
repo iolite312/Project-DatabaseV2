@@ -13,9 +13,8 @@ namespace SomerenDAL
     {
         public List<Teacher> GetAllTeachers()
         {
-            string query = "SELECT id, DocentNummer, Voornaam , Achternaam, TelefoonNummer , DateOfBirth FROM [Docent]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            string query = "SELECT id, DocentNummer, Voornaam , Achternaam, TelefoonNummer , DateOfBirth FROM [Docent] ORDER BY [Achternaam] ASC";
+            return ReadTables(ExecuteSelectQuery(query));
         }
 
         private List<Teacher> ReadTables(DataTable dataTable)
