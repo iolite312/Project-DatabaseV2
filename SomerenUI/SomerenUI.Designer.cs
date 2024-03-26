@@ -145,6 +145,7 @@ namespace SomerenUI
             StockStock = new System.Windows.Forms.ColumnHeader();
             StockStatus = new System.Windows.Forms.ColumnHeader();
             lblStock = new System.Windows.Forms.Label();
+            Room = new System.Windows.Forms.ColumnHeader();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -469,7 +470,7 @@ namespace SomerenUI
             // listViewLecturers
             // 
             listViewLecturers.AllowDrop = true;
-            listViewLecturers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lectureID, firstnameLecturer, lastNameLecturer, telephoneNumberL, AgeLecturer });
+            listViewLecturers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lectureID, firstnameLecturer, lastNameLecturer, telephoneNumberL, AgeLecturer, Room });
             listViewLecturers.FullRowSelect = true;
             listViewLecturers.GridLines = true;
             listViewLecturers.Location = new System.Drawing.Point(18, 56);
@@ -1105,6 +1106,10 @@ namespace SomerenUI
             lblStock.TabIndex = 0;
             lblStock.Text = "Stock";
             // 
+            // Room
+            // 
+            Room.Text = "Room";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1272,5 +1277,6 @@ namespace SomerenUI
         private System.Windows.Forms.Button LecturersDeleteBtn;
         private System.Windows.Forms.Button LecturersEditBtn;
         private System.Windows.Forms.Button LecturersAddBtn;
+        private System.Windows.Forms.ColumnHeader Room;
     }
 }

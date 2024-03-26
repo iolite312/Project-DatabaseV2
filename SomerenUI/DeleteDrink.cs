@@ -25,7 +25,6 @@ namespace SomerenUI
             InitializeComponent();
             DeleteDrinksEditedLbl.Visible = false;
             DeleteDrinkNametxt.Text = drink.name.ToString();
-
         }
 
        

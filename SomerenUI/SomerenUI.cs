@@ -201,10 +201,11 @@ namespace SomerenUI
             foreach (Teacher teacher in teachers)
             {
                 ListViewItem li = new ListViewItem(teacher.Number.ToString());
-                li.SubItems.Add(teacher.FirstName.ToString());
+                li.SubItems.Add(teacher.FirstName);
                 li.SubItems.Add(teacher.SurName);
                 li.SubItems.Add(teacher.TelephoneNumber.ToString());
                 li.SubItems.Add(teacher.Age.ToString());
+                li.SubItems.Add(teacher.Room);
                 li.Tag = teacher;   // link Lecturer object to listview item
                 listViewLecturers.Items.Add(li);
             }
@@ -652,17 +653,35 @@ namespace SomerenUI
 
         private void LecturersAddBtn_Click(object sender, EventArgs e)
         {
-
+            AddLecturers addLecturers = new AddLecturers();
+            addLecturers.ShowDialog();
+            ShowTeachersPanel();
         }
 
         private void LecturersEditBtn_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ListViewItem li = listViewLecturers.SelectedItems[0];
+                Teacher teacher  = li.Tag as Teacher;
+                EditLecturers editLecturers = new EditLecturers(teacher);
+                editLecturers.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show("Please select a lecturer to edit."); }
+            ShowTeachersPanel();
         }
 
         private void LecturersDeleteBtn_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ListViewItem li = listViewLecturers.SelectedItems[0];
+                Teacher teacher = li.Tag as Teacher;
+                DeleteLecturers deleteLecturers = new DeleteLecturers(teacher);
+                deleteLecturers.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show("Please select a lecturer to delete."); }
+            ShowTeachersPanel();
         }
     }
 }

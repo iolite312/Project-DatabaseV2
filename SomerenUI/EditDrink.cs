@@ -27,7 +27,7 @@ namespace SomerenUI
             EditDrinkNametxt.Text = drink.name.ToString();
             EditDrinkPricetxt.Text = drink.price.ToString();
             EditDrinkStockTxt.Text = drink.stock.ToString();
-            if (drink.type == 0) { DrinkEditAlcoholicYesBtn.Checked = true; DrinkEditAlcoholicNoBtn.Checked = true; }
+            if (drink.type == 0) { DrinkEditAlcoholicYesBtn.Checked = false; DrinkEditAlcoholicNoBtn.Checked = true; }
             else { DrinkEditAlcoholicYesBtn.Checked = true; DrinkEditAlcoholicNoBtn.Checked = false; }
         }
 
@@ -51,7 +51,7 @@ namespace SomerenUI
 
         private void CheckNotEmpty(string name, decimal price, int stock)
         {
-            bool nullCheck;
+            
             if (string.IsNullOrEmpty(name)) { throw new Exception("Please enter a name for the drink"); }
             if (price < 0) { throw new Exception("Please enter a valid price for the drink e.g 2.00"); }
             if (stock < 0) { throw new Exception("Please enter a valid stock amount for the drink e.g 20"); }

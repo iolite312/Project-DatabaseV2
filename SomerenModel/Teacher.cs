@@ -5,6 +5,27 @@ namespace SomerenModel
 {
     public class Teacher
     {
+        public Teacher(int id, string FirstName, string SurName, int Number, int TelephoneNumber, string Room, DateTime BirthDate) 
+        {
+            Id = id;
+            this.FirstName = FirstName;
+            this.SurName = SurName;
+            this.Number = Number;
+            this.TelephoneNumber = TelephoneNumber;
+            this.Room = Room;
+            this.BirthDate = BirthDate;
+        }
+
+        public Teacher(string FirstName, string SurName, int Number, int TelephoneNumber, string Room, DateTime BirthDate)
+        {
+            this.FirstName = FirstName;
+            this.SurName = SurName;
+            this.Number = Number;
+            this.TelephoneNumber = TelephoneNumber;
+            this.Room = Room;
+            this.BirthDate = BirthDate;
+        }
+
         public int Id { get; set; }     // database id
         public string FirstName { get; set; }
         public string SurName { get; set; }
@@ -12,6 +33,7 @@ namespace SomerenModel
 
         public int TelephoneNumber { get; set; }
 
+        public string Room { get; set; }
         public DateTime BirthDate { get; set; }
 
         public string FullName
