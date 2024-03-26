@@ -1,5 +1,6 @@
 using SomerenService;
 using SomerenModel;
+using static SomerenModel.DrankVAT;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
@@ -301,7 +302,7 @@ namespace SomerenUI
             item.SubItems.Add(totalVat.ToString("C"));
             listViewVATReport.Items.Clear(); // Clear all items first
             listViewVATReport.Items.Add(item);
-         }
+        }
         private void submitDate()
         {
             DateTime startDate = dtpStartDate.Value.Date;
@@ -614,10 +615,25 @@ namespace SomerenUI
                 int totalDrinks = CheckOrderCount();
                 decimal totalPrice = totalDrinks * fullDrink.price;
                 OrderTotalInputlbl.Text = $"{totalPrice}";
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void manageSupervisorsbtn_Click(object sender, EventArgs e)
+        {
+            ManageSupervisors manageSupervisors = new ManageSupervisors();
+            manageSupervisors.ShowDialog();
+            ShowActivitiesPanel();
+        }
+
+        private void manageParticipantsbtn_Click(object sender, EventArgs e)
+        {
+            ManageParticipants manageParticipants = new ManageParticipants();
+            manageParticipants.ShowDialog();
+            ShowActivitiesPanel();
         }
     }
 }
