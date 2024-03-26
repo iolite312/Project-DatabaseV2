@@ -67,6 +67,9 @@ namespace SomerenUI
             labelRooms = new System.Windows.Forms.Label();
             pictureBox2 = new System.Windows.Forms.PictureBox();
             pnlLecturers = new System.Windows.Forms.Panel();
+            LecturersDeleteBtn = new System.Windows.Forms.Button();
+            LecturersEditBtn = new System.Windows.Forms.Button();
+            LecturersAddBtn = new System.Windows.Forms.Button();
             listViewLecturers = new System.Windows.Forms.ListView();
             lectureID = new System.Windows.Forms.ColumnHeader();
             firstnameLecturer = new System.Windows.Forms.ColumnHeader();
@@ -136,7 +139,6 @@ namespace SomerenUI
             DrinksAddBtn = new System.Windows.Forms.Button();
             pictureBoxStock = new System.Windows.Forms.PictureBox();
             listViewStock = new System.Windows.Forms.ListView();
-            StockId = new System.Windows.Forms.ColumnHeader();
             StockName = new System.Windows.Forms.ColumnHeader();
             StockPrice = new System.Windows.Forms.ColumnHeader();
             StockType = new System.Windows.Forms.ColumnHeader();
@@ -422,6 +424,9 @@ namespace SomerenUI
             // 
             // pnlLecturers
             // 
+            pnlLecturers.Controls.Add(LecturersDeleteBtn);
+            pnlLecturers.Controls.Add(LecturersEditBtn);
+            pnlLecturers.Controls.Add(LecturersAddBtn);
             pnlLecturers.Controls.Add(pictureBox2);
             pnlLecturers.Controls.Add(listViewLecturers);
             pnlLecturers.Controls.Add(label2);
@@ -430,6 +435,36 @@ namespace SomerenUI
             pnlLecturers.Name = "pnlLecturers";
             pnlLecturers.Size = new System.Drawing.Size(1072, 621);
             pnlLecturers.TabIndex = 3;
+            // 
+            // LecturersDeleteBtn
+            // 
+            LecturersDeleteBtn.Location = new System.Drawing.Point(924, 284);
+            LecturersDeleteBtn.Name = "LecturersDeleteBtn";
+            LecturersDeleteBtn.Size = new System.Drawing.Size(94, 29);
+            LecturersDeleteBtn.TabIndex = 5;
+            LecturersDeleteBtn.Text = "Delete";
+            LecturersDeleteBtn.UseVisualStyleBackColor = true;
+            LecturersDeleteBtn.Click += LecturersDeleteBtn_Click;
+            // 
+            // LecturersEditBtn
+            // 
+            LecturersEditBtn.Location = new System.Drawing.Point(924, 249);
+            LecturersEditBtn.Name = "LecturersEditBtn";
+            LecturersEditBtn.Size = new System.Drawing.Size(94, 29);
+            LecturersEditBtn.TabIndex = 4;
+            LecturersEditBtn.Text = "Edit";
+            LecturersEditBtn.UseVisualStyleBackColor = true;
+            LecturersEditBtn.Click += LecturersEditBtn_Click;
+            // 
+            // LecturersAddBtn
+            // 
+            LecturersAddBtn.Location = new System.Drawing.Point(924, 214);
+            LecturersAddBtn.Name = "LecturersAddBtn";
+            LecturersAddBtn.Size = new System.Drawing.Size(94, 29);
+            LecturersAddBtn.TabIndex = 3;
+            LecturersAddBtn.Text = "Add";
+            LecturersAddBtn.UseVisualStyleBackColor = true;
+            LecturersAddBtn.Click += LecturersAddBtn_Click;
             // 
             // listViewLecturers
             // 
@@ -1024,7 +1059,7 @@ namespace SomerenUI
             // listViewStock
             // 
             listViewStock.AllowDrop = true;
-            listViewStock.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { StockId, StockName, StockPrice, StockType, StockStock, StockStatus });
+            listViewStock.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { StockName, StockPrice, StockType, StockStock, StockStatus });
             listViewStock.FullRowSelect = true;
             listViewStock.GridLines = true;
             listViewStock.Location = new System.Drawing.Point(14, 45);
@@ -1034,10 +1069,6 @@ namespace SomerenUI
             listViewStock.TabIndex = 1;
             listViewStock.UseCompatibleStateImageBehavior = false;
             listViewStock.View = System.Windows.Forms.View.Details;
-            // 
-            // StockId
-            // 
-            StockId.Text = "Id";
             // 
             // StockName
             // 
@@ -1079,13 +1110,13 @@ namespace SomerenUI
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1120, 703);
+            Controls.Add(pnlStock);
+            Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(pnlVATReport);
             Controls.Add(pnlOrders);
-            Controls.Add(pnlStock);
             Controls.Add(pnlRevenue);
             Controls.Add(pnlRooms);
-            Controls.Add(pnlLecturers);
             Controls.Add(menuStrip1);
             Controls.Add(pnlStudents);
             Controls.Add(pnlDashboard);
@@ -1215,7 +1246,6 @@ namespace SomerenUI
         private System.Windows.Forms.Panel pnlStock;
         private System.Windows.Forms.PictureBox pictureBoxStock;
         private System.Windows.Forms.ListView listViewStock;
-        private System.Windows.Forms.ColumnHeader StockId;
         private System.Windows.Forms.ColumnHeader StockName;
         private System.Windows.Forms.ColumnHeader StockPrice;
         private System.Windows.Forms.ColumnHeader StockType;
@@ -1239,5 +1269,8 @@ namespace SomerenUI
         private System.Windows.Forms.Label OrderTotalPricelbl;
         private System.Windows.Forms.Button manageParticipantsbtn;
         private System.Windows.Forms.Button manageSupervisorsbtn;
+        private System.Windows.Forms.Button LecturersDeleteBtn;
+        private System.Windows.Forms.Button LecturersEditBtn;
+        private System.Windows.Forms.Button LecturersAddBtn;
     }
 }

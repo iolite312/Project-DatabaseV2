@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DrinkEditDrinkIdLbl = new System.Windows.Forms.Label();
             DrinkEditDrinkNameLbl = new System.Windows.Forms.Label();
             DrinkEditDrinkPriceLbl = new System.Windows.Forms.Label();
             DrinkEditDrinkTypeLbl = new System.Windows.Forms.Label();
             DrinkEditDrinkStockLbl = new System.Windows.Forms.Label();
-            EditDrinkSelectCB = new System.Windows.Forms.ComboBox();
             EditDrinkPricetxt = new System.Windows.Forms.TextBox();
             EditDrinkStockTxt = new System.Windows.Forms.TextBox();
             EditDrinkNametxt = new System.Windows.Forms.TextBox();
@@ -44,19 +42,10 @@
             EditDrinkHeaderLbl = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
-            // DrinkEditDrinkIdLbl
-            // 
-            DrinkEditDrinkIdLbl.AutoSize = true;
-            DrinkEditDrinkIdLbl.Location = new System.Drawing.Point(9, 105);
-            DrinkEditDrinkIdLbl.Name = "DrinkEditDrinkIdLbl";
-            DrinkEditDrinkIdLbl.Size = new System.Drawing.Size(25, 20);
-            DrinkEditDrinkIdLbl.TabIndex = 0;
-            DrinkEditDrinkIdLbl.Text = "Id:";
-            // 
             // DrinkEditDrinkNameLbl
             // 
             DrinkEditDrinkNameLbl.AutoSize = true;
-            DrinkEditDrinkNameLbl.Location = new System.Drawing.Point(6, 146);
+            DrinkEditDrinkNameLbl.Location = new System.Drawing.Point(16, 91);
             DrinkEditDrinkNameLbl.Name = "DrinkEditDrinkNameLbl";
             DrinkEditDrinkNameLbl.Size = new System.Drawing.Size(52, 20);
             DrinkEditDrinkNameLbl.TabIndex = 1;
@@ -65,7 +54,7 @@
             // DrinkEditDrinkPriceLbl
             // 
             DrinkEditDrinkPriceLbl.AutoSize = true;
-            DrinkEditDrinkPriceLbl.Location = new System.Drawing.Point(6, 179);
+            DrinkEditDrinkPriceLbl.Location = new System.Drawing.Point(16, 124);
             DrinkEditDrinkPriceLbl.Name = "DrinkEditDrinkPriceLbl";
             DrinkEditDrinkPriceLbl.Size = new System.Drawing.Size(44, 20);
             DrinkEditDrinkPriceLbl.TabIndex = 2;
@@ -74,7 +63,7 @@
             // DrinkEditDrinkTypeLbl
             // 
             DrinkEditDrinkTypeLbl.AutoSize = true;
-            DrinkEditDrinkTypeLbl.Location = new System.Drawing.Point(9, 209);
+            DrinkEditDrinkTypeLbl.Location = new System.Drawing.Point(19, 154);
             DrinkEditDrinkTypeLbl.Name = "DrinkEditDrinkTypeLbl";
             DrinkEditDrinkTypeLbl.Size = new System.Drawing.Size(74, 20);
             DrinkEditDrinkTypeLbl.TabIndex = 3;
@@ -83,45 +72,36 @@
             // DrinkEditDrinkStockLbl
             // 
             DrinkEditDrinkStockLbl.AutoSize = true;
-            DrinkEditDrinkStockLbl.Location = new System.Drawing.Point(9, 242);
+            DrinkEditDrinkStockLbl.Location = new System.Drawing.Point(19, 187);
             DrinkEditDrinkStockLbl.Name = "DrinkEditDrinkStockLbl";
             DrinkEditDrinkStockLbl.Size = new System.Drawing.Size(48, 20);
             DrinkEditDrinkStockLbl.TabIndex = 4;
             DrinkEditDrinkStockLbl.Text = "Stock:";
             // 
-            // EditDrinkSelectCB
-            // 
-            EditDrinkSelectCB.FormattingEnabled = true;
-            EditDrinkSelectCB.Location = new System.Drawing.Point(126, 105);
-            EditDrinkSelectCB.Name = "EditDrinkSelectCB";
-            EditDrinkSelectCB.Size = new System.Drawing.Size(125, 28);
-            EditDrinkSelectCB.TabIndex = 5;
-            EditDrinkSelectCB.SelectedIndexChanged += EditDrinkSelectCB_SelectedIndexChanged;
-            // 
             // EditDrinkPricetxt
             // 
-            EditDrinkPricetxt.Location = new System.Drawing.Point(126, 172);
+            EditDrinkPricetxt.Location = new System.Drawing.Point(136, 117);
             EditDrinkPricetxt.Name = "EditDrinkPricetxt";
             EditDrinkPricetxt.Size = new System.Drawing.Size(125, 27);
             EditDrinkPricetxt.TabIndex = 7;
             // 
             // EditDrinkStockTxt
             // 
-            EditDrinkStockTxt.Location = new System.Drawing.Point(126, 235);
+            EditDrinkStockTxt.Location = new System.Drawing.Point(136, 180);
             EditDrinkStockTxt.Name = "EditDrinkStockTxt";
             EditDrinkStockTxt.Size = new System.Drawing.Size(125, 27);
             EditDrinkStockTxt.TabIndex = 9;
             // 
             // EditDrinkNametxt
             // 
-            EditDrinkNametxt.Location = new System.Drawing.Point(126, 139);
+            EditDrinkNametxt.Location = new System.Drawing.Point(136, 84);
             EditDrinkNametxt.Name = "EditDrinkNametxt";
             EditDrinkNametxt.Size = new System.Drawing.Size(125, 27);
             EditDrinkNametxt.TabIndex = 11;
             // 
             // EditDrinkEditBtn
             // 
-            EditDrinkEditBtn.Location = new System.Drawing.Point(98, 289);
+            EditDrinkEditBtn.Location = new System.Drawing.Point(93, 234);
             EditDrinkEditBtn.Name = "EditDrinkEditBtn";
             EditDrinkEditBtn.Size = new System.Drawing.Size(94, 29);
             EditDrinkEditBtn.TabIndex = 12;
@@ -132,7 +112,7 @@
             // DrinkEditAlcoholicNoBtn
             // 
             DrinkEditAlcoholicNoBtn.AutoSize = true;
-            DrinkEditAlcoholicNoBtn.Location = new System.Drawing.Point(201, 205);
+            DrinkEditAlcoholicNoBtn.Location = new System.Drawing.Point(211, 150);
             DrinkEditAlcoholicNoBtn.Name = "DrinkEditAlcoholicNoBtn";
             DrinkEditAlcoholicNoBtn.Size = new System.Drawing.Size(50, 24);
             DrinkEditAlcoholicNoBtn.TabIndex = 14;
@@ -143,7 +123,7 @@
             // DrinkEditAlcoholicYesBtn
             // 
             DrinkEditAlcoholicYesBtn.AutoSize = true;
-            DrinkEditAlcoholicYesBtn.Location = new System.Drawing.Point(126, 205);
+            DrinkEditAlcoholicYesBtn.Location = new System.Drawing.Point(136, 150);
             DrinkEditAlcoholicYesBtn.Name = "DrinkEditAlcoholicYesBtn";
             DrinkEditAlcoholicYesBtn.Size = new System.Drawing.Size(51, 24);
             DrinkEditAlcoholicYesBtn.TabIndex = 13;
@@ -154,7 +134,7 @@
             // EditDrinksEditedLbl
             // 
             EditDrinksEditedLbl.AutoSize = true;
-            EditDrinksEditedLbl.Location = new System.Drawing.Point(91, 321);
+            EditDrinksEditedLbl.Location = new System.Drawing.Point(85, 266);
             EditDrinksEditedLbl.Name = "EditDrinksEditedLbl";
             EditDrinksEditedLbl.Size = new System.Drawing.Size(108, 20);
             EditDrinksEditedLbl.TabIndex = 15;
@@ -174,7 +154,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(273, 367);
+            ClientSize = new System.Drawing.Size(273, 300);
             Controls.Add(EditDrinkHeaderLbl);
             Controls.Add(EditDrinksEditedLbl);
             Controls.Add(DrinkEditAlcoholicNoBtn);
@@ -183,12 +163,10 @@
             Controls.Add(EditDrinkNametxt);
             Controls.Add(EditDrinkStockTxt);
             Controls.Add(EditDrinkPricetxt);
-            Controls.Add(EditDrinkSelectCB);
             Controls.Add(DrinkEditDrinkStockLbl);
             Controls.Add(DrinkEditDrinkTypeLbl);
             Controls.Add(DrinkEditDrinkPriceLbl);
             Controls.Add(DrinkEditDrinkNameLbl);
-            Controls.Add(DrinkEditDrinkIdLbl);
             Name = "EditDrink";
             Text = "EditDrink";
             ResumeLayout(false);
@@ -196,13 +174,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label DrinkEditDrinkIdLbl;
         private System.Windows.Forms.Label DrinkEditDrinkNameLbl;
         private System.Windows.Forms.Label DrinkEditDrinkPriceLbl;
         private System.Windows.Forms.Label DrinkEditDrinkTypeLbl;
         private System.Windows.Forms.Label DrinkEditDrinkStockLbl;
-        private System.Windows.Forms.ComboBox EditDrinkSelectCB;
         private System.Windows.Forms.TextBox EditDrinkPricetxt;
         private System.Windows.Forms.TextBox EditDrinkStockTxt;
         private System.Windows.Forms.TextBox EditDrinkNametxt;

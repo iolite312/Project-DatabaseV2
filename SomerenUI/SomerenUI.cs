@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
 using System.Data.SqlTypes;
+using static System.Windows.Forms.LinkLabel;
+using System.Numerics;
 
 namespace SomerenUI
 {
@@ -397,8 +399,7 @@ namespace SomerenUI
             listViewStock.Items.Clear();
             foreach (Drinks drink in drinks)
             {
-                ListViewItem li = new ListViewItem(drink.Id.ToString());
-                li.SubItems.Add(drink.name.ToString());
+                ListViewItem li = new ListViewItem(drink.name.ToString());
                 li.SubItems.Add(drink.price.ToString());
                 li.SubItems.Add(drink.Type);
                 li.SubItems.Add(drink.stock.ToString());
@@ -501,15 +502,28 @@ namespace SomerenUI
 
         private void DrinksEditBtn_Click(object sender, EventArgs e)
         {
-            EditDrink EditDrinkForm = new EditDrink();
-            EditDrinkForm.ShowDialog();
+            try
+            {
+                ListViewItem li = listViewStock.SelectedItems[0];
+                Drinks drink = li.Tag as Drinks;
+                EditDrink EditDrinkForm = new EditDrink(drink);
+                EditDrinkForm.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show("Please select a drink to edit."); }
+
             ShowStockPanel();
         }
 
         private void DrinksDeleteBtn_Click(object sender, EventArgs e)
         {
-            DeleteDrink deleteDrinkForm = new DeleteDrink();
-            deleteDrinkForm.ShowDialog();
+            try
+            {
+                ListViewItem li = listViewStock.SelectedItems[0];
+                Drinks drink = li.Tag as Drinks;
+                DeleteDrink deleteDrinkForm = new DeleteDrink(drink);
+                deleteDrinkForm.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show("Please select a drink to delete."); }
             ShowStockPanel();
         }
 
@@ -634,6 +648,21 @@ namespace SomerenUI
             ManageParticipants manageParticipants = new ManageParticipants();
             manageParticipants.ShowDialog();
             ShowActivitiesPanel();
+        }
+
+        private void LecturersAddBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LecturersEditBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LecturersDeleteBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
