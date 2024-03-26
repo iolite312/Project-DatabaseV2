@@ -556,6 +556,7 @@ namespace SomerenUI
 
         private void comboDrinks_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboCount.Items.Clear();
             DrinksService drinksService = new DrinksService();
             int currentDrink = comboDrinks.SelectedIndex;
             Drinks fullDrink = drinksService.GetDrinkById(currentDrink + 1);
@@ -594,6 +595,7 @@ namespace SomerenUI
             comboCount.ResetText();
             comboStudent.ResetText();
             comboDrinks.ResetText();
+            OrderTotalInputlbl.Text = "0.00";
             DisplayOrders();
         }
         private int CheckOrderCount()
