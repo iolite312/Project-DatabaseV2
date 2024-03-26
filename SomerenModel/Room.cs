@@ -12,24 +12,12 @@
                 return RoomNumber[0]; //Gets the building where the room is located
             }
         }
-        public string Type
-        {
-            get
-            {
-                if (Floor == 1 && Building == 'A')
-                {
-                    return "Lecturer"; // when true it is a room for a teacher
-                } else
-                {
-                    return "Student"; // when false it is a room for a teacher
-                }
-            }
-        }
+        public RoomEnum Type { get; set; }
         public int RoomSize
         {
             get
             {
-                return Type == "Lecturer" ? 1 : 8;
+                return Type == RoomEnum.lecturer ? 1 : 8;
             }
         }
     }

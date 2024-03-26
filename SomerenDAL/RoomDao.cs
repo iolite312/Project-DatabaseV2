@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Data;
 using SomerenModel;
+using System;
 
 
 namespace SomerenDAL
@@ -10,7 +11,7 @@ namespace SomerenDAL
     {
         public List<Room> GetAllRooms()
         {
-            string query = "SELECT id, KamerNummer, Verdieping FROM Kamer";
+            string query = "SELECT id, KamerNummer, Verdieping, typeRoom FROM Kamer";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -24,7 +25,8 @@ namespace SomerenDAL
                 {
                     Id = (int)dr["id"],
                     RoomNumber = (string)dr["KamerNummer"],
-                    Floor = (int)dr["Verdieping"]
+                    Floor = (int)dr["Verdieping"],
+                    Type = Enum.Parse<RoomEnum>((string)dr["typeRoom"])
                 };
                 rooms.Add(room);
             }
