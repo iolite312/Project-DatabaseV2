@@ -293,7 +293,7 @@ namespace SomerenUI
             listViewStudents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listViewStudents.MultiSelect = false;
             listViewStudents.Name = "listViewStudents";
-            listViewStudents.Size = new System.Drawing.Size(690, 526);
+            listViewStudents.Size = new System.Drawing.Size(874, 526);
             listViewStudents.TabIndex = 1;
             listViewStudents.UseCompatibleStateImageBehavior = false;
             listViewStudents.View = System.Windows.Forms.View.Details;
@@ -335,7 +335,7 @@ namespace SomerenUI
             // 
             // btnDeleteLV
             // 
-            btnDeleteLV.Location = new System.Drawing.Point(743, 247);
+            btnDeleteLV.Location = new System.Drawing.Point(909, 295);
             btnDeleteLV.Margin = new System.Windows.Forms.Padding(2);
             btnDeleteLV.Name = "btnDeleteLV";
             btnDeleteLV.Size = new System.Drawing.Size(90, 27);
@@ -346,7 +346,7 @@ namespace SomerenUI
             // 
             // btnEditLV
             // 
-            btnEditLV.Location = new System.Drawing.Point(743, 201);
+            btnEditLV.Location = new System.Drawing.Point(909, 249);
             btnEditLV.Margin = new System.Windows.Forms.Padding(2);
             btnEditLV.Name = "btnEditLV";
             btnEditLV.Size = new System.Drawing.Size(90, 27);
@@ -357,7 +357,7 @@ namespace SomerenUI
             // 
             // btnAddLV
             // 
-            btnAddLV.Location = new System.Drawing.Point(743, 158);
+            btnAddLV.Location = new System.Drawing.Point(909, 206);
             btnAddLV.Margin = new System.Windows.Forms.Padding(2);
             btnAddLV.Name = "btnAddLV";
             btnAddLV.Size = new System.Drawing.Size(90, 27);
@@ -1120,10 +1120,10 @@ namespace SomerenUI
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1120, 703);
+            Controls.Add(pnlStudents);
             Controls.Add(pnlActivities);
             Controls.Add(pnlOrders);
             Controls.Add(pnlLecturers);
-            Controls.Add(pnlStudents);
             Controls.Add(pnlStock);
             Controls.Add(pnlVATReport);
             Controls.Add(pnlRooms);
