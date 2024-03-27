@@ -650,9 +650,34 @@ namespace SomerenUI
             ShowStudentsPanel();
         }
 
+        private Student selectedStudent;
+
         private void btnEditLV_Click(object sender, EventArgs e)
         {
- 
+            if (listViewStudents.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listViewStudents.SelectedItems[0];
+                Student selectedStudent = (Student)selectedItem.Tag;
+
+                // Pass the selected student to the edit form
+                EditStudent editForm = new EditStudent(selectedStudent);
+                editForm.ShowDialog();
+                ShowStudentsPanel();
+            }
+            else
+            {
+                MessageBox.Show("Please select a student to edit.");
+            }
+        }
+
+        private void listViewStudents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listViewStudents.SelectedItems[0];
+                Student selectedStudent = (Student)selectedItem.Tag;
+
+            }
         }
     }
 }
