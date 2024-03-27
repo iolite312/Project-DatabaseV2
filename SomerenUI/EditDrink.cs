@@ -16,31 +16,22 @@ namespace SomerenUI
     public partial class EditDrink : Form
     {
         DrinksService drinksService;
-        List<Drinks> drinks;
+        Drinks drink;
 
-        public EditDrink()
+        public EditDrink(Drinks drinkEdit)
         {
+            drinksService = new DrinksService();
+            drink = drinkEdit;
             InitializeComponent();
             EditDrinksEditedLbl.Visible = false;
-            drinksService = new DrinksService();
-            drinks = drinksService.GetDrinks();
-            foreach (Drinks drink in drinks)
-            {
-                EditDrinkSelectCB.Items.Add(drink.Id);
-            }
-        }
-
-        private void EditDrinkSelectCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string drinkIdString = EditDrinkSelectCB.SelectedItem.ToString();
-            int drinkId = int.Parse(drinkIdString);
-            Drinks drink = drinksService.GetDrinkById(drinkId);
             EditDrinkNametxt.Text = drink.name.ToString();
             EditDrinkPricetxt.Text = drink.price.ToString();
             EditDrinkStockTxt.Text = drink.stock.ToString();
-            if (drink.type == 0) { DrinkEditAlcoholicYesBtn.Checked = true; DrinkEditAlcoholicNoBtn.Checked = true; }
+            if (drink.type == 0) { DrinkEditAlcoholicYesBtn.Checked = false; DrinkEditAlcoholicNoBtn.Checked = true; }
             else { DrinkEditAlcoholicYesBtn.Checked = true; DrinkEditAlcoholicNoBtn.Checked = false; }
         }
+
+        
 
 
 
@@ -48,11 +39,11 @@ namespace SomerenUI
         {
             try
             {
-                string drinkIdString = EditDrinkSelectCB.SelectedItem.ToString(); int drinkId = int.Parse(drinkIdString); string name = EditDrinkNametxt.Text.ToString(); decimal price = decimal.Parse(EditDrinkPricetxt.Text); Int16 isAlcoholic; int stock = int.Parse(EditDrinkStockTxt.Text);
+                int drinkId = drink.Id; string name = EditDrinkNametxt.Text.ToString(); decimal price = decimal.Parse(EditDrinkPricetxt.Text); Int16 isAlcoholic; int stock = int.Parse(EditDrinkStockTxt.Text);
                 if (DrinkEditAlcoholicYesBtn.Checked) { isAlcoholic = 1; } else if (DrinkEditAlcoholicNoBtn.Checked) { isAlcoholic = 0; } else { throw new Exception("Please select if the drink contains alcohol."); }
                 CheckNotEmpty(name, price, stock);
-                Drinks drink = new Drinks(drinkId, name, price, isAlcoholic, stock);
-                drinksService.EditDrinks(drink);
+                Drinks EditedDrink = new Drinks(drinkId, name, price, isAlcoholic, stock);
+                drinksService.EditDrinks(EditedDrink);
                 EditDrinksEditedLbl.Visible = true;
             }
             catch (Exception ex) { MessageBox.Show($"Error: {ex.Message}"); }
@@ -60,7 +51,7 @@ namespace SomerenUI
 
         private void CheckNotEmpty(string name, decimal price, int stock)
         {
-            bool nullCheck;
+            
             if (string.IsNullOrEmpty(name)) { throw new Exception("Please enter a name for the drink"); }
             if (price < 0) { throw new Exception("Please enter a valid price for the drink e.g 2.00"); }
             if (stock < 0) { throw new Exception("Please enter a valid stock amount for the drink e.g 20"); }

@@ -44,7 +44,6 @@ namespace SomerenUI
 
         private void CheckNotEmpty(string name, decimal price, int stock)
         {
-            bool nullCheck;
             if (string.IsNullOrEmpty(name)) { throw new Exception("Please enter a name for the drink");}
             if (price < 0) {throw new Exception("Please enter a valid price for the drink e.g 2.00");}
             if (stock < 0) { throw new Exception("Please enter a valid stock amount for the drink e.g 20");}
