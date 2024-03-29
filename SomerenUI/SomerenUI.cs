@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
 using System.Data.SqlTypes;
+using static System.Windows.Forms.LinkLabel;
+using System.Numerics;
 
 namespace SomerenUI
 {
@@ -199,10 +201,11 @@ namespace SomerenUI
             foreach (Teacher teacher in teachers)
             {
                 ListViewItem li = new ListViewItem(teacher.Number.ToString());
-                li.SubItems.Add(teacher.FirstName.ToString());
+                li.SubItems.Add(teacher.FirstName);
                 li.SubItems.Add(teacher.SurName);
                 li.SubItems.Add(teacher.TelephoneNumber.ToString());
                 li.SubItems.Add(teacher.Age.ToString());
+                li.SubItems.Add(teacher.Room);
                 li.Tag = teacher;   // link Lecturer object to listview item
                 listViewLecturers.Items.Add(li);
             }
@@ -397,8 +400,7 @@ namespace SomerenUI
             listViewStock.Items.Clear();
             foreach (Drinks drink in drinks)
             {
-                ListViewItem li = new ListViewItem(drink.Id.ToString());
-                li.SubItems.Add(drink.name.ToString());
+                ListViewItem li = new ListViewItem(drink.name.ToString());
                 li.SubItems.Add(drink.price.ToString());
                 li.SubItems.Add(drink.Type);
                 li.SubItems.Add(drink.stock.ToString());
@@ -501,15 +503,28 @@ namespace SomerenUI
 
         private void DrinksEditBtn_Click(object sender, EventArgs e)
         {
-            EditDrink EditDrinkForm = new EditDrink();
-            EditDrinkForm.ShowDialog();
+            try
+            {
+                ListViewItem li = listViewStock.SelectedItems[0];
+                Drinks drink = li.Tag as Drinks;
+                EditDrink EditDrinkForm = new EditDrink(drink);
+                EditDrinkForm.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show("Please select a drink to edit."); }
+
             ShowStockPanel();
         }
 
         private void DrinksDeleteBtn_Click(object sender, EventArgs e)
         {
-            DeleteDrink deleteDrinkForm = new DeleteDrink();
-            deleteDrinkForm.ShowDialog();
+            try
+            {
+                ListViewItem li = listViewStock.SelectedItems[0];
+                Drinks drink = li.Tag as Drinks;
+                DeleteDrink deleteDrinkForm = new DeleteDrink(drink);
+                deleteDrinkForm.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show("Please select a drink to delete."); }
             ShowStockPanel();
         }
 
@@ -636,6 +651,39 @@ namespace SomerenUI
             ManageParticipants manageParticipants = new ManageParticipants();
             manageParticipants.ShowDialog();
             ShowActivitiesPanel();
+        }
+
+        private void LecturersAddBtn_Click(object sender, EventArgs e)
+        {
+            AddLecturers addLecturers = new AddLecturers();
+            addLecturers.ShowDialog();
+            ShowTeachersPanel();
+        }
+
+        private void LecturersEditBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ListViewItem li = listViewLecturers.SelectedItems[0];
+                Teacher teacher  = li.Tag as Teacher;
+                EditLecturers editLecturers = new EditLecturers(teacher);
+                editLecturers.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show("Please select a lecturer to edit."); }
+            ShowTeachersPanel();
+        }
+
+        private void LecturersDeleteBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ListViewItem li = listViewLecturers.SelectedItems[0];
+                Teacher teacher = li.Tag as Teacher;
+                DeleteLecturers deleteLecturers = new DeleteLecturers(teacher);
+                deleteLecturers.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show("Please select a lecturer to delete."); }
+            ShowTeachersPanel();
         }
     }
 }
