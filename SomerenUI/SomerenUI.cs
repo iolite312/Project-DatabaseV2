@@ -641,9 +641,15 @@ namespace SomerenUI
 
         private void manageSupervisorsbtn_Click(object sender, EventArgs e)
         {
-            ManageSupervisors manageSupervisors = new ManageSupervisors();
-            manageSupervisors.ShowDialog();
-            ShowActivitiesPanel();
+            if (listViewActivities.SelectedItems.Count != 0 && listViewActivities.SelectedItems.Count < 2)
+            {
+                ManageSupervisors manageSupervisors = new ManageSupervisors((Activiteiten)listViewActivities.SelectedItems[0].Tag);
+                manageSupervisors.ShowDialog();
+                ShowActivitiesPanel();
+            } else
+            {
+                MessageBox.Show("Please select one activity!");
+            }
         }
 
         private void manageParticipantsbtn_Click(object sender, EventArgs e)

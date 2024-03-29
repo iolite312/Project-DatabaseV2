@@ -76,6 +76,7 @@ namespace SomerenUI
             lastNameLecturer = new System.Windows.Forms.ColumnHeader();
             telephoneNumberL = new System.Windows.Forms.ColumnHeader();
             AgeLecturer = new System.Windows.Forms.ColumnHeader();
+            Room = new System.Windows.Forms.ColumnHeader();
             label2 = new System.Windows.Forms.Label();
             FirstName = new System.Windows.Forms.ColumnHeader();
             LastName = new System.Windows.Forms.ColumnHeader();
@@ -145,7 +146,6 @@ namespace SomerenUI
             StockStock = new System.Windows.Forms.ColumnHeader();
             StockStatus = new System.Windows.Forms.ColumnHeader();
             lblStock = new System.Windows.Forms.Label();
-            Room = new System.Windows.Forms.ColumnHeader();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -503,6 +503,10 @@ namespace SomerenUI
             // AgeLecturer
             // 
             AgeLecturer.Text = "Age";
+            // 
+            // Room
+            // 
+            Room.Text = "Room";
             // 
             // label2
             // 
@@ -1105,10 +1109,6 @@ namespace SomerenUI
             lblStock.Size = new System.Drawing.Size(90, 41);
             lblStock.TabIndex = 0;
             lblStock.Text = "Stock";
-            // 
-            // Room
-            // 
-            Room.Text = "Room";
             // 
             // SomerenUI
             // 
