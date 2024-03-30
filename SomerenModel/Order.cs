@@ -8,15 +8,15 @@ namespace SomerenModel
 {
     public class Order
     {
-        public int DrinkId { get; set; }
-        public int StudentId { get; set; }
+        public Drinks Drink { get; set; }
+        public Student Student { get; set; }
         public DateTime Date { get; set; }
         public int Count { get; set; }
 
-        public Order(int drinkId, int studentId, DateTime date, int count)
+        public Order(Drinks drink, Student student, DateTime date, int count)
         {
-            DrinkId = drinkId;
-            StudentId = studentId;
+            Drink = drink;
+            Student = student;
             Date = date;
             Count = count;
         }

@@ -571,6 +571,7 @@ namespace SomerenUI
 
         private void comboDrinks_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboCount.Items.Clear();
             DrinksService drinksService = new DrinksService();
             int currentDrink = comboDrinks.SelectedIndex;
             Drinks fullDrink = drinksService.GetDrinkById(currentDrink + 1);
@@ -591,8 +592,8 @@ namespace SomerenUI
                 Student currentStudent = students[comboStudent.SelectedIndex];
                 Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
                 int totalDrinks = CheckOrderCount();
-                Order order = new Order(fullDrink.Id, currentStudent.Number, DateTime.Now, totalDrinks);
-                orderService.InsertOrder(order, fullDrink);
+                Order order = new Order(fullDrink, currentStudent, DateTime.Now, totalDrinks);
+                orderService.InsertOrder(order);
                 ClearOrderScreen();
             }
             catch (Exception ex)
@@ -609,6 +610,7 @@ namespace SomerenUI
             comboCount.ResetText();
             comboStudent.ResetText();
             comboDrinks.ResetText();
+            OrderTotalInputlbl.Text = "0.00";
             DisplayOrders();
         }
         private int CheckOrderCount()
@@ -639,9 +641,15 @@ namespace SomerenUI
 
         private void manageSupervisorsbtn_Click(object sender, EventArgs e)
         {
-            ManageSupervisors manageSupervisors = new ManageSupervisors();
-            manageSupervisors.ShowDialog();
-            ShowActivitiesPanel();
+            if (listViewActivities.SelectedItems.Count != 0 && listViewActivities.SelectedItems.Count < 2)
+            {
+                ManageSupervisors manageSupervisors = new ManageSupervisors((Activiteiten)listViewActivities.SelectedItems[0].Tag);
+                manageSupervisors.ShowDialog();
+                ShowActivitiesPanel();
+            } else
+            {
+                MessageBox.Show("Please select one activity!");
+            }
         }
 
         private void manageParticipantsbtn_Click(object sender, EventArgs e)
