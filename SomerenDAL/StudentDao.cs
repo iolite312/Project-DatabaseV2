@@ -10,7 +10,7 @@ namespace SomerenDAL
     {
         public List<Student> GetAllStudents()
         {
-            string query = "SELECT StudentNummer, Voornaam, Achternaam, TelefoonNummer, KamerNummer, Klas FROM [Student] ORDER BY Achternaam";
+            string query = "SELECT Id, StudentNummer, Voornaam, Achternaam, TelefoonNummer, KamerNummer, Klas FROM [Student] ORDER BY Achternaam";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -29,7 +29,8 @@ namespace SomerenDAL
                     Number = (int)dr["StudentNummer"],
                     PhoneNumber = (int)dr["TelefoonNummer"],
                     Class = dr["Klas"].ToString(),
-                    RoomNumber = dr["KamerNummer"].ToString()
+                    RoomNumber = dr["KamerNummer"].ToString(),
+                    Id = (int)dr["Id"]
 
                 };
                 students.Add(student);
@@ -57,9 +58,15 @@ namespace SomerenDAL
         // Update an existing student in the database
         public void EditStudent(Student student)
         {
-            string query = "UPDATE [Student] SET StudentNummer = @StudentNummer, Voornaam = @Voornaam, " +
-                           "Achternaam = @Achternaam, TelefoonNummer = @TelefoonNummer, " +
-                           "KamerNummer = @KamerNummer, Klas = @Klas WHERE Id = @Id";
+            string query = @"UPDATE [Student] SET 
+                            StudentNummer = @StudentNummer, 
+                            Voornaam = @Voornaam, 
+                            Achternaam = @Achternaam, 
+                            TelefoonNummer = @TelefoonNummer, 
+                            KamerNummer = @KamerNummer, 
+                            Klas = @Klas 
+                            WHERE Id = @Id";
+
             SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@StudentNummer", student.Number),
@@ -68,7 +75,8 @@ namespace SomerenDAL
                 new SqlParameter("@TelefoonNummer", student.PhoneNumber),
                 new SqlParameter("@KamerNummer", student.RoomNumber),
                 new SqlParameter("@Klas", student.Class),
-                new SqlParameter("@Id", student.Id)
+                new SqlParameter("@Id", student.Id) 
+
             };
             ExecuteEditQuery(query, sqlParameters);
         }
