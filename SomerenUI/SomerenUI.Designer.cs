@@ -296,6 +296,7 @@ namespace SomerenUI
             listViewStudents.MultiSelect = false;
             listViewStudents.Name = "listViewStudents";
             listViewStudents.Size = new System.Drawing.Size(862, 656);
+            listViewStudents.Size = new System.Drawing.Size(874, 526);
             listViewStudents.TabIndex = 1;
             listViewStudents.UseCompatibleStateImageBehavior = false;
             listViewStudents.View = System.Windows.Forms.View.Details;
@@ -337,7 +338,7 @@ namespace SomerenUI
             // 
             // btnDeleteLV
             // 
-            btnDeleteLV.Location = new System.Drawing.Point(929, 309);
+            btnDeleteLV.Location = new System.Drawing.Point(909, 295);
             btnDeleteLV.Margin = new System.Windows.Forms.Padding(2);
             btnDeleteLV.Name = "btnDeleteLV";
             btnDeleteLV.Size = new System.Drawing.Size(112, 34);
@@ -348,7 +349,7 @@ namespace SomerenUI
             // 
             // btnEditLV
             // 
-            btnEditLV.Location = new System.Drawing.Point(929, 251);
+            btnEditLV.Location = new System.Drawing.Point(909, 249);
             btnEditLV.Margin = new System.Windows.Forms.Padding(2);
             btnEditLV.Name = "btnEditLV";
             btnEditLV.Size = new System.Drawing.Size(112, 34);
@@ -359,7 +360,7 @@ namespace SomerenUI
             // 
             // btnAddLV
             // 
-            btnAddLV.Location = new System.Drawing.Point(929, 198);
+            btnAddLV.Location = new System.Drawing.Point(909, 206);
             btnAddLV.Margin = new System.Windows.Forms.Padding(2);
             btnAddLV.Name = "btnAddLV";
             btnAddLV.Size = new System.Drawing.Size(112, 34);
@@ -1134,7 +1135,7 @@ namespace SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1400, 879);
+            ClientSize = new System.Drawing.Size(1120, 703);
             Controls.Add(pnlStudents);
             Controls.Add(pnlActivities);
             Controls.Add(pnlOrders);
