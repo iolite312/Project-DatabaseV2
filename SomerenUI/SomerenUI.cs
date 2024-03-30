@@ -680,6 +680,7 @@ namespace SomerenUI
             if (studentService != null)
             {
                 List<Student> students = studentService.GetStudents();
+                DisplayStudents(students);
 
             }
             else
