@@ -54,15 +54,34 @@ namespace SomerenUI
         {
             try
             {
-                ManageSupervisorsService manageSupervisorsService = new ManageSupervisorsService();
-                manageSupervisorsService.AddSupervisorsToActivity(teachersToBeAdded, activiteit);
-                manageSupervisorsService.RemoveSupervisorsToActivity(teachersToBeRemoved, activiteit);
-                MessageBox.Show("Update Succesful");
-                this.Close();
+                if (teachersToBeRemoved.Count !> 0)
+                {
+                    DeleteSupervisorPopup deleteSupervisorPopup = new DeleteSupervisorPopup();
+                    deleteSupervisorPopup.ShowDialog();
+                    if (!deleteSupervisorPopup.canceled)
+                    {
+                        ActivateService();
+                    } else
+                    {
+                        canceled = true;
+                        this.Close();
+                    }
+                } else
+                {
+                    ActivateService();
+                }
             } catch (Exception ex)
             {
                 throw ex;
             }
+        }
+        private void ActivateService()
+        {
+            ManageSupervisorsService manageSupervisorsService = new ManageSupervisorsService();
+            manageSupervisorsService.AddSupervisorsToActivity(teachersToBeAdded, activiteit);
+            manageSupervisorsService.RemoveSupervisorsToActivity(teachersToBeRemoved, activiteit);
+            MessageBox.Show("Update Succesful");
+            this.Close();
         }
     }
 }
