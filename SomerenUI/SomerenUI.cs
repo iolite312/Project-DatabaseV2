@@ -393,7 +393,7 @@ namespace SomerenUI
         private List<Drinks> GetDrinks()
         {
             DrinksService drinksService = new DrinksService();
-            List<Drinks> drinks = drinksService.GetDrinks();
+            List<Drinks> drinks = drinksService.GetDrinksNotOrdered();
             return drinks;
         }
 
