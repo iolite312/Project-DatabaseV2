@@ -266,11 +266,14 @@ namespace SomerenUI
         }
         private void ShowVATReportPanel()
         {
-            pnlActivities.Hide();
             pnlDashboard.Hide();
-            pnlLecturers.Hide();
-            pnlRooms.Hide();
             pnlStudents.Hide();
+            pnlLecturers.Hide();
+            pnlActivities.Hide();
+            pnlRooms.Hide();
+            pnlStock.Hide();
+            pnlOrders.Hide();
+            pnlRevenue.Hide();
             pnlVATReport.Show();
 
             // Validate year
