@@ -22,5 +22,26 @@ namespace SomerenService
             List<Teacher> teachers = lecturerdb.GetAllTeachers();
             return teachers;
         }
+
+        public void AddLecturer(Teacher teacher)
+        {
+            lecturerdb.AddLecturer(teacher);
+        }
+
+        public void EditLecturer(Teacher teacher)
+        {
+            lecturerdb.EditLecturer(teacher);
+        }
+
+        public void RemoveLecturer(Teacher teacher)
+        {
+            lecturerdb.DeleteLecturer(teacher);
+        }
+
+        public Teacher GetLecturerById(int id)
+        {
+            Teacher teacher = lecturerdb.GetById(id);
+            return teacher;
+        }
     }
 }

@@ -17,43 +17,28 @@ namespace SomerenUI
     public partial class DeleteDrink : Form
     {
         DrinksService drinksService;
-        List<Drinks> drinks;
         Drinks drink;
-        public DeleteDrink()
+        public DeleteDrink(Drinks drinkDelete)
         {
+            drinksService = new DrinksService();
+            this.drink = drinkDelete;
             InitializeComponent();
             DeleteDrinksEditedLbl.Visible = false;
-            drinksService = new DrinksService();
-            drinks = drinksService.GetDrinks();
-            foreach (Drinks drink in drinks)
-            {
-                DeleteDrinkSelectCB.Items.Add(drink.Id);
-            }
-        }
-
-        private void DeleteDrinkSelectCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string drinkIdString = DeleteDrinkSelectCB.SelectedItem.ToString();
-            int drinkId = int.Parse(drinkIdString);
-            drink = drinksService.GetDrinkById(drinkId);
             DeleteDrinkNametxt.Text = drink.name.ToString();
         }
 
+       
+
         private void DeleteDrinkEditBtn_Click(object sender, EventArgs e)
-        {
-            DeletingDrink();
-
-        }
-
-        private void DeletingDrink()
         {
             try
             {
-                string drinkIdString = DeleteDrinkSelectCB.SelectedItem.ToString(); int drinkId = int.Parse(drinkIdString); string name = DeleteDrinkNametxt.Text.ToString();
                 drinksService.RemoveDrinks(drink);
-                DeleteDrinksEditedLbl.Visible = true;
             }
             catch (Exception ex) { MessageBox.Show($"Error: {ex.Message}"); }
+            DeleteDrinksEditedLbl.Visible = true;
         }
+
+        
     }
 }

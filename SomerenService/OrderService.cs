@@ -15,11 +15,11 @@ namespace SomerenService
         { 
             orderDao = new OrderDao();
         }
-        public void InsertOrder(Order order, Drinks drink)
+        public void InsertOrder(Order order)
         {
             orderDao.InsertOrder(order);
             DrinksService drinksService = new DrinksService();
-            Drinks newDrink = drink;
+            Drinks newDrink = order.Drink;
             int newStock = newDrink.stock - order.Count;
             newDrink.stock = newStock;
             drinksService.EditDrinks(newDrink);
