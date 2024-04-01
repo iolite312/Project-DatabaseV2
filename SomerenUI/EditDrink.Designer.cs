@@ -127,7 +127,6 @@
             EditDrinkNametxt.Name = "EditDrinkNametxt";
             EditDrinkNametxt.Size = new System.Drawing.Size(155, 31);
             EditDrinkNametxt.TabIndex = 11;
-            EditDrinkNametxt.TextChanged += EditDrinkNametxt_TextChanged;
             // 
             // EditDrinkEditBtn
             // 
