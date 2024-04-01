@@ -22,6 +22,11 @@ namespace SomerenService
             List<Drinks> drinks = drinksDao.GetAllDrinks();
             return drinks;
         }
+        public List<Drinks> GetDrinksNotOrdered()
+        {
+            List<Drinks> drinks = drinksDao.GetAllDrinksNotOrdered();
+            return drinks;
+        }
 
         public void AddDrinks(Drinks drink)
         {
