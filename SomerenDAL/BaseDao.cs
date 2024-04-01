@@ -19,6 +19,27 @@ namespace SomerenDAL
 
         }
 
+        protected int ExecuteScalar(string query, params SqlParameter[] sqlParameters)
+        {
+            SqlCommand command = new SqlCommand();
+
+            try
+            {
+                command.Connection = OpenConnection();
+                command.CommandText = query;
+                command.Parameters.AddRange(sqlParameters);
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (SqlException e)
+            {
+                // Print.ErrorLog(e);
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
         protected SqlConnection OpenConnection()
         {
             try

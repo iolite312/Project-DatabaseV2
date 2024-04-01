@@ -658,7 +658,67 @@ namespace SomerenUI
             manageParticipants.ShowDialog();
             ShowActivitiesPanel();
         }
+        private void btnAddLV_Click(object sender, EventArgs e)
+        {
+            AddStudent addStudent = new AddStudent();
+            addStudent.ShowDialog();
+            ShowStudentsPanel();
+        }
 
+        private void btnDeleteLV_Click(object sender, EventArgs e)
+        {
+            DeleteStudent deleteStudent = new DeleteStudent();
+            deleteStudent.ShowDialog();
+            ShowStudentsPanel();
+        }
+
+        private Student selectedStudent;
+        private StudentService studentService = new StudentService();
+
+        private void btnEditLV_Click(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listViewStudents.SelectedItems[0];
+                selectedStudent = (Student)selectedItem.Tag; // Assign the selected student to the class-level field
+
+                // Pass the selected student to the edit form
+                EditStudent editForm = new EditStudent(selectedStudent);
+                editForm.FormClosed += EditForm_FormClosed;
+                editForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a student to edit.");
+            }
+        }
+        private void EditForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            RefreshStudentList();
+        }
+        private void RefreshStudentList()
+        {
+
+            if (studentService != null)
+            {
+                List<Student> students = studentService.GetStudents();
+                DisplayStudents(students);
+
+            }
+            else
+            {
+                MessageBox.Show("Can't update");
+            }
+        }
+
+        private void listViewStudents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listViewStudents.SelectedItems[0];
+                selectedStudent = (Student)selectedItem.Tag;
+            }
+        }
         private void LecturersAddBtn_Click(object sender, EventArgs e)
         {
             AddLecturers addLecturers = new AddLecturers();
