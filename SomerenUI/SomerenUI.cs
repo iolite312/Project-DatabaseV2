@@ -393,6 +393,12 @@ namespace SomerenUI
         private List<Drinks> GetDrinks()
         {
             DrinksService drinksService = new DrinksService();
+            List<Drinks> drinks = drinksService.GetDrinks();
+            return drinks;
+        }
+        private List<Drinks> GetDrinksNotOrdered()
+        {
+            DrinksService drinksService = new DrinksService();
             List<Drinks> drinks = drinksService.GetDrinksNotOrdered();
             return drinks;
         }
@@ -560,7 +566,7 @@ namespace SomerenUI
         private void DisplayOrders()
         {
             List<Student> students = GetStudents();
-            List<Drinks> drinks = GetDrinks();
+            List<Drinks> drinks = GetDrinksNotOrdered();
             foreach (Student student in students)
             {
                 comboStudent.Items.Add($"{student.FullName}");
@@ -568,7 +574,7 @@ namespace SomerenUI
             }
             foreach (Drinks drink in drinks)
             {
-                comboDrinks.Items.Add($"{drink.name}");
+                comboDrinks.Items.Add($"{drink.name} ({drink.Id})");
             }
         }
 
@@ -576,8 +582,8 @@ namespace SomerenUI
         {
             comboCount.Items.Clear();
             DrinksService drinksService = new DrinksService();
-            int currentDrink = comboDrinks.SelectedIndex;
-            Drinks fullDrink = drinksService.GetDrinkById(currentDrink + 1);
+            int replacedDrink = ConvertComboBoxToInt();
+            Drinks fullDrink = drinksService.GetDrinkById(replacedDrink);
             for (int i = 0; fullDrink.stock >= i; i++)
             {
                 comboCount.Items.Add(i);
@@ -593,7 +599,8 @@ namespace SomerenUI
                 DrinksService drinksService = new DrinksService();
                 List<Student> students = GetStudents();
                 Student currentStudent = students[comboStudent.SelectedIndex];
-                Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
+                int replacedDrink = ConvertComboBoxToInt();
+                Drinks fullDrink = drinksService.GetDrinkById(replacedDrink);
                 int totalDrinks = CheckOrderCount();
                 Order order = new Order(fullDrink, currentStudent, DateTime.Now, totalDrinks);
                 orderService.InsertOrder(order);
@@ -631,7 +638,8 @@ namespace SomerenUI
             {
 
                 DrinksService drinksService = new DrinksService();
-                Drinks fullDrink = drinksService.GetDrinkById(comboDrinks.SelectedIndex + 1);
+                int replacedDrink = ConvertComboBoxToInt();
+                Drinks fullDrink = drinksService.GetDrinkById(replacedDrink);
                 int totalDrinks = CheckOrderCount();
                 decimal totalPrice = totalDrinks * fullDrink.price;
                 OrderTotalInputlbl.Text = $"{totalPrice}";
@@ -640,6 +648,13 @@ namespace SomerenUI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private int ConvertComboBoxToInt()
+        {
+            string currentDrink = (string)comboDrinks.SelectedItem;
+            string[] modifiedDrink = currentDrink.Split(' ');
+            string replacedDrink = modifiedDrink[modifiedDrink.Length - 1].Replace('(', ' ').Replace(')', ' ');
+            return int.Parse(replacedDrink);
         }
 
         private void manageSupervisorsbtn_Click(object sender, EventArgs e)
